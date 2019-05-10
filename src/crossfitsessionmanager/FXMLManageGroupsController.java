@@ -5,9 +5,13 @@
  */
 package crossfitsessionmanager;
 
+import accesoBD.AccesoBD;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import modelo.Grupo;
 
 /**
  * FXML Controller class
@@ -17,15 +21,19 @@ import javafx.fxml.Initializable;
 public class FXMLManageGroupsController implements Initializable {
 
     
-
-    /**
-     * Initializes the controller class.
-     */
+    
+    
+    AccesoBD accesoBD;
+    public static ObservableList<Grupo> groupObservableList;
+    ArrayList<Grupo> groupData = new ArrayList<Grupo>();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        accesoBD  = AccesoBD.getInstance();
+        
     }    
     
     static void initStage() {
+        
     }
 }
