@@ -19,7 +19,7 @@ public class CrossfitSessionManager extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLMainWindow.fxml"));
         
         Scene scene = new Scene(root);
         
