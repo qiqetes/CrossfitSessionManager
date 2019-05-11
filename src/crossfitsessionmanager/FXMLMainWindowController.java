@@ -10,8 +10,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +25,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import modelo.Gym;
 
 /**
@@ -92,7 +95,7 @@ public class FXMLMainWindowController implements Initializable {
             AnchorPane root = (AnchorPane) loader.load();
             Stage stage = new Stage();
             FXMLSessionTemplatesController SessionTemplatesController = loader.<FXMLSessionTemplatesController>getController();
-            FXMLSessionTemplatesController.initStage();
+            FXMLSessionTemplatesController.initStage(stage);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Session Templates");
@@ -113,8 +116,9 @@ public class FXMLMainWindowController implements Initializable {
         //If the changes have not already been saved -> Save Dialog
         if(!alreadySaved){saveDialog();
         }else{
-            Stage stage = (Stage) bStartSession.getScene().getWindow();
-            stage.close();
+            /*Borrar: Stage stage = (Stage) bStartSession.getScene().getWindow();
+            stage.close();*/
+            Platform.exit();
         }
     }
 
@@ -141,18 +145,20 @@ public class FXMLMainWindowController implements Initializable {
         ButtonType bDontSave = new ButtonType("Don't Save");        
         alert.getButtonTypes().setAll(bSave, bDontSave, ButtonType.CANCEL);
         
-        Stage stage = (Stage) bStartSession.getScene().getWindow();
+        /*Borrar: Stage stage = (Stage) bStartSession.getScene().getWindow();*/
         
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent()){
             if(result.get() == bSave){
                 onClickMenuBarSave(null);
                 System.out.println("Save");  
-                stage.close();
+                /*Borrar:stage.close();*/
+                Platform.exit();
             }
             else if(result.get() == bDontSave){
                 System.out.println("Don't Save");
-                stage.close();
+                /*Borrar:stage.close();*/
+                Platform.exit();
             }
             else{
                 System.err.println("Cancel");
