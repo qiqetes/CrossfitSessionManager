@@ -5,17 +5,25 @@
  */
 package crossfitsessionmanager;
 
+import accesoBD.AccesoBD;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import modelo.Gym;
 
 /**
  * FXML Controller class
@@ -23,15 +31,23 @@ import javafx.stage.Stage;
  * @author Qiqete
  */
 public class FXMLMainWindowController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
+    
+    @FXML
+    private Button bStartSession;
+    
+    private AccesoBD singleton = AccesoBD.getInstance();
+    private Gym gym = singleton.getGym();
+    
+    private boolean alreadySaved = false;    
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-                
-    }    
-
+        
+    }   
+    
+    
     @FXML
     private void onClickManageGroups(ActionEvent event) {
         /*Open window*/
@@ -85,6 +101,64 @@ public class FXMLMainWindowController implements Initializable {
         }
         catch(IOException ioe){ioe.printStackTrace();}
     }
+
+    @FXML
+    private void onClickMenuBarSave(ActionEvent event) {
+        singleton.salvar();
+        alreadySaved = true;
+    }
+
+    @FXML
+    private void onClickMenuBarClose(ActionEvent event) {
+        //If the changes have not already been saved -> Save Dialog
+        if(!alreadySaved){saveDialog();
+        }else{
+            Stage stage = (Stage) bStartSession.getScene().getWindow();
+            stage.close();
+        }
+    }
+
+    @FXML
+    private void onClickMenuBarAddGroup(ActionEvent event) {
+    }
+
+    @FXML
+    private void onClickMenuBarModifyGroup(ActionEvent event) {
+    }
+
+    @FXML
+    private void onClickMenuBarAddTemplate(ActionEvent event) {
+    }
     
     
+    /*Save changes and close project Dialog*/
+    public void saveDialog(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Save and Close");
+        alert.setHeaderText("Do you want to save the changes?");
+        //Customized buttons
+        ButtonType bSave = new ButtonType("Save");
+        ButtonType bDontSave = new ButtonType("Don't Save");        
+        alert.getButtonTypes().setAll(bSave, bDontSave, ButtonType.CANCEL);
+        
+        Stage stage = (Stage) bStartSession.getScene().getWindow();
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent()){
+            if(result.get() == bSave){
+                onClickMenuBarSave(null);
+                System.out.println("Save");  
+                stage.close();
+            }
+            else if(result.get() == bDontSave){
+                System.out.println("Don't Save");
+                stage.close();
+            }
+            else{
+                System.err.println("Cancel");
+            }
+            
+            
+        }
+    }
 }

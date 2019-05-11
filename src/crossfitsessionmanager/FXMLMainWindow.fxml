@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -8,9 +11,29 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLMainWindowController">
    <children>
+      <MenuBar prefHeight="25.0" prefWidth="1200.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarSave" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarClose" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Groups">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarAddGroup" text="Add Group" />
+                  <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarModifyGroup" text="Modify Group" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Sessions">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarAddTemplate" text="Add Template" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
       <VBox layoutX="550.0" layoutY="72.0" prefHeight="730.0" prefWidth="652.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
@@ -29,7 +52,7 @@
                </rowConstraints>
                <children>
                   <Button mnemonicParsing="false" onAction="#onClickManageGroups" text="Manage Groups" />
-                  <Button mnemonicParsing="false" onAction="#onClickStartSession" text="Start Session" GridPane.columnIndex="1" />
+                  <Button fx:id="bStartSession" mnemonicParsing="false" onAction="#onClickStartSession" text="Start Session" GridPane.columnIndex="1" />
                   <Button mnemonicParsing="false" onAction="#onClickSessionTemplates" text="Session Templates" GridPane.columnIndex="2" />
                </children>
             </GridPane>

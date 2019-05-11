@@ -7,6 +7,7 @@ package crossfitsessionmanager;
 
 
 
+
 public class Utils {
     
     
