@@ -37,7 +37,10 @@ public class FXMLMainWindowController implements Initializable {
     
     @FXML
     private Button bStartSession;
+    @FXML
+    private AnchorPane root;
     
+    private Stage primaryStage;
     private AccesoBD singleton = AccesoBD.getInstance();
     private Gym gym = singleton.getGym();
     
@@ -50,6 +53,13 @@ public class FXMLMainWindowController implements Initializable {
         
     }   
     
+    
+    public void initStage(Stage stage){
+        primaryStage = stage;
+        primaryStage.setOnCloseRequest((e)->{
+            onClickMenuBarClose(null);
+        });
+    }
     
     @FXML
     private void onClickManageGroups(ActionEvent event) {
@@ -105,6 +115,7 @@ public class FXMLMainWindowController implements Initializable {
         catch(IOException ioe){ioe.printStackTrace();}
     }
 
+    
     @FXML
     private void onClickMenuBarSave(ActionEvent event) {
         singleton.salvar();
