@@ -1,0 +1,22 @@
+*{
+    -col-bg: white;
+    -col-light: #F4F6F8;
+    -col-dark: #323D4A;
+    -col-greyed: #9097A0;   
+    -col-accent: #269AF3;
+}
+
+.bg{
+    -fx-background-color: -col-light;
+}
+
+.inputField{
+    -fx-background-color:  white;
+    -fx-background-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-border-color: -col-greyed;
+    -fx-border-radius: 10px;
+    -fx-text-fill: -col-dark;
+    -fx-font-size: 18px;
+    -fx-prompt-text-fill: -col-greyed;
+}
