@@ -5,6 +5,7 @@
  */
 package crossfitsessionmanager;
 
+import accesoBD.AccesoBD;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -37,15 +38,15 @@ public class FXMLSessionTemplatesController implements Initializable {
     public static ObservableList<SesionTipo> obsListSessions;
     private ArrayList<SesionTipo> arrayListSessions;
 
-    
+    private AccesoBD singleton;
 
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        singleton = AccesoBD.getInstance();
         /*listView initialization*/
-        arrayListSessions = new ArrayList();
+        
+        arrayListSessions = singleton.getGym().getTiposSesion();
         obsListSessions = FXCollections.observableArrayList(arrayListSessions);
         listViewSessions.setItems(obsListSessions);
         

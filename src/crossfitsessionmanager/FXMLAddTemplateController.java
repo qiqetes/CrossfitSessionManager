@@ -66,6 +66,7 @@ public class FXMLAddTemplateController implements Initializable {
     private void onClickbAdd(ActionEvent event) {
         createTemplate();
         FXMLSessionTemplatesController.obsListSessions.add(sesionTipo);
+        singleton.getGym().getTiposSesion().add(sesionTipo);
         onClickbCancel(event);
     }
 
