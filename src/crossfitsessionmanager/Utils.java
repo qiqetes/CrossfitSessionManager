@@ -5,14 +5,19 @@
  */
 package crossfitsessionmanager;
 
+import accesoBD.AccesoBD;
+import java.util.ArrayList;
 import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import modelo.SesionTipo;
 
 
 
 
 public class Utils {
+    
+    
     
     /*All types of dialogs*/
     public static void dialog(Alert.AlertType alertType, String title, String header, String content){
@@ -31,6 +36,16 @@ public class Utils {
       } catch (NumberFormatException e) {  
          return false;  
       } 
+    }
+    
+    public static boolean isCodeRepeated(AccesoBD singleton, String code){
+        ArrayList<SesionTipo> sesiones = singleton.getGym().getTiposSesion();
+        for(int i = 0; i< sesiones.size(); i++){
+            if(code.equals(sesiones.get(i).getCodigo())){
+                return true;
+            }
+        }
+        return false;
     }
     
 }

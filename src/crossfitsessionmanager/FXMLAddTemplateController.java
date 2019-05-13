@@ -51,7 +51,13 @@ public class FXMLAddTemplateController implements Initializable {
     private TextField[] sesionTipoAttr;
     
     
-
+    private boolean codeError;
+    private boolean warmtimeError;
+    private boolean exercisesError;
+    private boolean workingtimeError;
+    private boolean restexercisesError;
+    private boolean restcircuError;
+    private boolean repsError;
     /**
      * Initializes the controller class.
      */
@@ -60,14 +66,83 @@ public class FXMLAddTemplateController implements Initializable {
         singleton = AccesoBD.getInstance();
         sesionTipoAttr = new TextField[]{tFWarmTime,tFNExercises,tFExerWorkingTime,tFRestExercises,tFCircuitReps,tFRestCircuits};
         bindings();
+        
+        tFCode.textProperty().addListener((observable, oldVal,newVal)->{
+            if(Utils.isCodeRepeated(singleton, newVal)){
+                codeError = true;
+                // TODO: add some kind of visual indicator
+            }else{
+                codeError = false;
+            }
+        });
+        
+        tFCircuitReps.textProperty().addListener((observable, oldVal,newVal)->{
+            if(!Utils.isNumeric( newVal)){
+                repsError = true;
+                // TODO: add some kind of visual indicator
+            }else{
+                repsError = false;
+            }
+        });
+        tFExerWorkingTime.textProperty().addListener((observable, oldVal,newVal)->{
+            if(!Utils.isNumeric( newVal)){
+                workingtimeError = true;
+                // TODO: add some kind of visual indicator
+            }else{
+                workingtimeError = false;
+            }
+        });
+        tFNExercises.textProperty().addListener((observable, oldVal,newVal)->{
+            if(!Utils.isNumeric( newVal)){
+                exercisesError = true;
+                // TODO: add some kind of visual indicator
+            }else{
+                exercisesError = false;
+            }
+        });
+        tFRestCircuits.textProperty().addListener((observable, oldVal,newVal)->{
+            if(!Utils.isNumeric( newVal)){
+                restcircuError = true;
+                // TODO: add some kind of visual indicator
+            }else{
+                restcircuError = false;
+            }
+        });
+        tFWarmTime.textProperty().addListener((observable, oldVal,newVal)->{
+            if(!Utils.isNumeric( newVal)){
+                warmtimeError = true;
+                // TODO: add some kind of visual indicator
+            }else{
+                warmtimeError = false;
+            }
+        });
+        tFRestExercises.textProperty().addListener((observable, oldVal,newVal)->{
+            if(!Utils.isNumeric( newVal)){
+                restexercisesError = true;
+                // TODO: add some kind of visual indicator
+            }else{
+                restexercisesError = false;
+            }
+        });
     }    
 
     @FXML
     private void onClickbAdd(ActionEvent event) {
-        createTemplate();
-        FXMLSessionTemplatesController.obsListSessions.add(sesionTipo);
-        singleton.getGym().getTiposSesion().add(sesionTipo);
-        onClickbCancel(event);
+        if(restcircuError || repsError || workingtimeError || exercisesError || restcircuError || warmtimeError){
+            Utils.dialog(Alert.AlertType.ERROR, "Error", "Invalid input", "Please insert numeric values");
+        }else if(codeError){
+            Utils.dialog(Alert.AlertType.ERROR, "Error", "Invalid input", "This code is already in use");
+        }
+        else{
+            
+            createTemplate();
+            FXMLSessionTemplatesController.obsListSessions.add(sesionTipo);
+            singleton.getGym().getTiposSesion().add(sesionTipo);
+            onClickbCancel(event);
+            Utils.dialog(Alert.AlertType.INFORMATION, "Successfully added", "Template was added successfully", null);
+            FXMLMainWindowController.alreadySaved = false;
+            
+        }      
     }
 
     @FXML
@@ -78,15 +153,6 @@ public class FXMLAddTemplateController implements Initializable {
     
     private void createTemplate(){
         sesionTipo = new SesionTipo();
-        /*Check if the code is already associated to another session*/
-        //TO IMPLEMENT
-        /*Check if each text field has the proper format input*/
-        for(int i = 0; i < sesionTipoAttr.length; i++){
-            if(!Utils.isNumeric(sesionTipoAttr[i].getText())){
-                Utils.dialog(Alert.AlertType.ERROR, "Error", "Input not valid", "Please, insert a numeric value");
-            }
-        }
-        /*Get proper values and assign them to the template object*/
         sesionTipo.setCodigo(tFCode.getText());
         sesionTipo.setT_calentamiento(Integer.parseInt(tFWarmTime.getText()));
         sesionTipo.setNum_ejercicios(Integer.parseInt(tFNExercises.getText()));

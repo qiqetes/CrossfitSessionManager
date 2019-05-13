@@ -41,7 +41,7 @@ public class FXMLMainWindowController implements Initializable {
     private AccesoBD singleton = AccesoBD.getInstance();
     private Gym gym = singleton.getGym();
     
-    private boolean alreadySaved = false;    
+    public static boolean alreadySaved = false;    
     
     
     
