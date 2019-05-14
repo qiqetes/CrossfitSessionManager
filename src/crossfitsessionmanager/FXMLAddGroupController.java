@@ -23,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import modelo.Grupo;
 import modelo.SesionTipo;
 
@@ -70,6 +71,18 @@ public class FXMLAddGroupController implements Initializable {
                 
         /*Initialize choiceBox*/
         cBDefaultSession.setItems(FXMLSessionTemplatesController.obsListSessions);
+        cBDefaultSession.setConverter(new StringConverter<SesionTipo>() {
+
+            @Override
+            public String toString(SesionTipo template) {
+                return "Template: " + template.getCodigo();
+            }
+
+            @Override
+            public SesionTipo fromString(String string) {
+                throw new UnsupportedOperationException("DON'T USE ME!"); 
+            }
+        });
     }    
 
     @FXML
@@ -99,8 +112,7 @@ public class FXMLAddGroupController implements Initializable {
     }
 
     private void bindings() {
-        /*NO VAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*/
-        BooleanBinding boolB = tFCode.textProperty().isEmpty().or(cBDefaultSession.selectionModelProperty().isNull());
+        BooleanBinding boolB = tFCode.textProperty().isEmpty().or(cBDefaultSession.valueProperty().isNull());
         bAdd.disableProperty().bind(boolB);
     }
 
