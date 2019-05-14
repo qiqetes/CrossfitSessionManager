@@ -6,6 +6,7 @@
 package crossfitsessionmanager;
 
 import accesoBD.AccesoBD;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -15,13 +16,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Grupo;
 import modelo.SesionTipo;
@@ -75,17 +76,20 @@ public class FXMLManageGroupsController implements Initializable {
 
     @FXML
     private void onClickAddGroup(ActionEvent event) {
+        /*Open window*/
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAddGroup.fxml"));
-            Parent root = (AnchorPane) loader.load();
+            AnchorPane root = (AnchorPane) loader.load();
             Stage stage = new Stage();
-            FXMLAddGroupController ManageGroupsController = loader.<FXMLManageGroupsController>getController();
-            FXMLManageGroupsController.initStage();
-            Scene scene = new Scene(root);
+            FXMLAddGroupController AddGroupController = loader.<FXMLAddGroupController>getController();
+            AddGroupController.initStage(stage, singleton);
+            Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Add Group");
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
-        }catch(Exception e){}
+        }
+        catch(IOException ioe){}
     }
 
     @FXML

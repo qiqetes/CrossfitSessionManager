@@ -65,10 +65,12 @@ public class FXMLAddTemplateController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         singleton = AccesoBD.getInstance();
         sesionTipoAttr = new TextField[]{tFWarmTime,tFNExercises,tFExerWorkingTime,tFRestExercises,tFCircuitReps,tFRestCircuits};
+        
+        /*Bindings*/
         bindings();
         
         tFCode.textProperty().addListener((observable, oldVal,newVal)->{
-            if(Utils.isCodeRepeated(singleton, newVal)){
+            if(Utils.isCodeRepeatedTemplates(singleton, newVal)){
                 codeError = true;
                 // TODO: add some kind of visual indicator
             }else{

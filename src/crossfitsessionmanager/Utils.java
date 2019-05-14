@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import modelo.Grupo;
 import modelo.SesionTipo;
 
 
@@ -38,7 +39,7 @@ public class Utils {
       } 
     }
     
-    public static boolean isCodeRepeated(AccesoBD singleton, String code){
+    public static boolean isCodeRepeatedTemplates(AccesoBD singleton, String code){
         ArrayList<SesionTipo> sesiones = singleton.getGym().getTiposSesion();
         for(int i = 0; i< sesiones.size(); i++){
             if(code.equals(sesiones.get(i).getCodigo())){
@@ -48,4 +49,13 @@ public class Utils {
         return false;
     }
     
+    public static boolean isCodeRepeatedGroups(AccesoBD singleton, String code){
+        ArrayList<Grupo> groups = singleton.getGym().getGrupos();
+        for(int i = 0; i< groups.size(); i++){
+            if(code.equals(groups.get(i).getCodigo())){
+                return true;
+            }
+        }
+        return false;
+    }
 }
