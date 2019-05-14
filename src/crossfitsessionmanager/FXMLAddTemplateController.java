@@ -74,6 +74,7 @@ public class FXMLAddTemplateController implements Initializable {
             }else{
                 codeError = false;
             }
+            //codeError = (Utils.isCodeRepeated(singleton, newVal)) ? true:false;
         });
         
         tFCircuitReps.textProperty().addListener((observable, oldVal,newVal)->{
@@ -134,14 +135,12 @@ public class FXMLAddTemplateController implements Initializable {
             Utils.dialog(Alert.AlertType.ERROR, "Error", "Invalid input", "This code is already in use");
         }
         else{
-            
             createTemplate();
             FXMLSessionTemplatesController.obsListSessions.add(sesionTipo);
             singleton.getGym().getTiposSesion().add(sesionTipo);
             onClickbCancel(event);
             Utils.dialog(Alert.AlertType.INFORMATION, "Successfully added", "Template was added successfully", null);
-            FXMLMainWindowController.alreadySaved = false;
-            
+            FXMLMainWindowController.alreadySaved = false;            
         }      
     }
 
