@@ -7,18 +7,13 @@ package crossfitsessionmanager;
 
 import accesoBD.AccesoBD;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.binding.BooleanBinding;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -32,7 +27,7 @@ import modelo.SesionTipo;
  *
  * @author Borja
  */
-public class FXMLAddGroupController implements Initializable {
+public class FXMLAddModifyGroupController implements Initializable {
 
     @FXML
     private TextField tFCode;
@@ -46,6 +41,7 @@ public class FXMLAddGroupController implements Initializable {
     private Stage primaryStage;
     private AccesoBD singleton;
     private Grupo g;
+    private Boolean modifyGroup = false;
     
     private boolean codeError;
     
@@ -70,7 +66,7 @@ public class FXMLAddGroupController implements Initializable {
         });
                 
         /*Initialize choiceBox*/
-        cBDefaultSession.setItems(FXMLSessionTemplatesController.obsListSessions);
+        cBDefaultSession.setItems(FXMLMainWindowController.obsListSessions);
         cBDefaultSession.setConverter(new StringConverter<SesionTipo>() {
 
             @Override
@@ -82,22 +78,31 @@ public class FXMLAddGroupController implements Initializable {
             public SesionTipo fromString(String string) {
                 throw new UnsupportedOperationException("DON'T USE ME!"); 
             }
-        });
+        });        
     }    
 
     @FXML
     private void onClickbAdd(ActionEvent event) {
-        if(codeError){
+        if(codeError && !modifyGroup){
             Utils.dialog(Alert.AlertType.ERROR, "Error", "Invalid input", "This code is already in use");
-        //}else if(arrayListGroups.isEmpty()){
+        //}else if(FXMLSessionTemplatesController.obsListSessions.isEmpty()){
             //implement a signal to say that a group cannot be created if there is not at least one session template created
         }else{
-            createGroup();
-            FXMLManageGroupsController.groupObsList.add(g);
-            singleton.getGym().getGrupos().add(g);
+            g.setCodigo(tFCode.getText());
+            g.setDescripcion(tADescription.getText());
+            g.setDefaultTipoSesion(cBDefaultSession.getValue());
+            
+            /*Add the new group to the list*/
+            if(!modifyGroup){                
+                FXMLMainWindowController.groupObsList.add(g);
+                singleton.getGym().getGrupos().add(g);
+            }        
             onClickbCancel(event);
             FXMLMainWindowController.alreadySaved = false;
-            Utils.dialog(Alert.AlertType.INFORMATION, "Successfully created", "Template was cteated successfully", null);
+            Utils.dialog(Alert.AlertType.INFORMATION, "Successfully created", "Template was created successfully", null);
+            
+            /*Refresh TableView*/
+            
         }
     }
 
@@ -106,22 +111,27 @@ public class FXMLAddGroupController implements Initializable {
         primaryStage.close();
     }
 
-    void initStage(Stage stage, AccesoBD singleton) {
+    void initStage(Stage stage, AccesoBD singleton, Grupo grupo) {
         primaryStage = stage;
         this.singleton = singleton;
+        /*Set fields to the values of the already-existing group*/
+        if(grupo != null){
+            g = grupo;
+            modifyGroup = true;
+            bAdd.setText("Modify");
+            tFCode.setText(g.getCodigo());
+            tFCode.setDisable(true);    //Disable to not let modifications
+            tADescription.setText(g.getDescripcion());
+            cBDefaultSession.setValue(g.getDefaultTipoSesion());
+        }
+        /*Create new group otherwise*/
+        else{
+            g = new Grupo();
+        }
     }
 
     private void bindings() {
         BooleanBinding boolB = tFCode.textProperty().isEmpty().or(cBDefaultSession.valueProperty().isNull());
         bAdd.disableProperty().bind(boolB);
-    }
-
-    
-    private void createGroup() {
-        g = new Grupo();
-        g.setCodigo(tFCode.getText());
-        g.setDescripcion(tADescription.getText());
-        g.setDefaultTipoSesion(cBDefaultSession.getValue());
-    }
-    
+    }    
 }

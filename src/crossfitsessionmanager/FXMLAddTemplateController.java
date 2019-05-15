@@ -138,7 +138,7 @@ public class FXMLAddTemplateController implements Initializable {
         }
         else{
             createTemplate();
-            FXMLSessionTemplatesController.obsListSessions.add(sesionTipo);
+            FXMLMainWindowController.obsListSessions.add(sesionTipo);
             singleton.getGym().getTiposSesion().add(sesionTipo);
             onClickbCancel(event);
             Utils.dialog(Alert.AlertType.INFORMATION, "Successfully added", "Template was added successfully", null);

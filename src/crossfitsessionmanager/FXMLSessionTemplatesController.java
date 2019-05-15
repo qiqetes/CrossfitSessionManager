@@ -9,6 +9,7 @@ import accesoBD.AccesoBD;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -31,27 +33,27 @@ import modelo.SesionTipo;
 public class FXMLSessionTemplatesController implements Initializable {
 
     @FXML
-    private ListView<SesionTipo> listViewSessions;
-    
-    private static Stage primaryStage;
-    
-    public static ObservableList<SesionTipo> obsListSessions;
-    private ArrayList<SesionTipo> arrayListSessions;
+    private ListView<SesionTipo> listViewSessions;    
+    @FXML
+    private Button bSeeDetails;
 
+    private static Stage primaryStage;
     private AccesoBD singleton;
+    
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         singleton = AccesoBD.getInstance();
-        /*listView initialization*/
         
-        arrayListSessions = singleton.getGym().getTiposSesion();
-        obsListSessions = FXCollections.observableArrayList(arrayListSessions);
-        listViewSessions.setItems(obsListSessions);
+        /*listView initialization*/        
+        listViewSessions.setItems(FXMLMainWindowController.obsListSessions);
         
         /*Cell Factory for templates listView*/
         listViewSessions.setCellFactory(c -> new SessionTemplateListCell());
+        
+        /*Disable certain buttons if no item is selected from the tableView*/
+            bSeeDetails.disableProperty().bind((Bindings.equal(-1, listViewSessions.getSelectionModel().selectedIndexProperty())));
     }    
     
     public static void initStage(Stage stage) {
@@ -74,18 +76,19 @@ public class FXMLSessionTemplatesController implements Initializable {
         }catch(Exception e){}
     }
 
+
     @FXML
-    private void bSeeDetails(ActionEvent event) {
+    private void onClickSeeDetails(ActionEvent event) {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLSessionDetails.fxml"));
             AnchorPane root = (AnchorPane) loader.load();
             Stage stage = new Stage();
             FXMLSessionDetailsController SessionDetailsController = loader.<FXMLSessionDetailsController>getController();
-            FXMLSessionDetailsController.initStage(stage);
+            SesionTipo sT = listViewSessions.getSelectionModel().getSelectedItem();
+            FXMLSessionDetailsController.initStage(stage, sT);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Session Details");
-            stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
         }catch(Exception e){}
     }

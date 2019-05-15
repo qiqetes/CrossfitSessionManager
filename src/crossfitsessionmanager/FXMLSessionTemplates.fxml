@@ -6,12 +6,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="crossfitsessionmanager.FXMLSessionTemplatesController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLSessionTemplatesController">
    <children>
       <ListView fx:id="listViewSessions" layoutX="58.0" layoutY="145.0" prefHeight="555.0" prefWidth="842.0" />
       <Button layoutX="1023.0" layoutY="153.0" mnemonicParsing="false" onAction="#bAddTemplate" prefWidth="100.0" text="Add Template" />
-      <Button layoutX="1020.0" layoutY="231.0" mnemonicParsing="false" onAction="#bSeeDetails" prefHeight="25.0" prefWidth="100.0" text="See Details" />
+      <Button fx:id="bSeeDetails" layoutX="1020.0" layoutY="231.0" mnemonicParsing="false" onAction="#onClickSeeDetails" prefHeight="25.0" prefWidth="100.0" text="See Details" />
       <Text layoutX="82.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CROSSFIT SESSIONS" wrappingWidth="588.8034057617188">
          <font>
             <Font size="34.0" />

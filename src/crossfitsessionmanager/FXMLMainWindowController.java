@@ -8,9 +8,12 @@ package crossfitsessionmanager;
 import accesoBD.AccesoBD;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -26,7 +29,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import modelo.Grupo;
 import modelo.Gym;
+import modelo.SesionTipo;
 
 /**
  * FXML Controller class
@@ -36,8 +41,6 @@ import modelo.Gym;
 public class FXMLMainWindowController implements Initializable {
     
     @FXML
-    private Button bStartSession;
-    @FXML
     private AnchorPane root;
     
     private Stage primaryStage;
@@ -46,11 +49,18 @@ public class FXMLMainWindowController implements Initializable {
     
     public static boolean alreadySaved = true;    
     
-    
+    public static ObservableList<SesionTipo> obsListSessions;
+    private ArrayList<SesionTipo> arrayListSessions;
+    public static ObservableList<Grupo> groupObsList;
+    private ArrayList<Grupo> groupData = new ArrayList();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        /*Initialize Global observableLists to use in every class: SessionTemplates and Groups*/
+        arrayListSessions = singleton.getGym().getTiposSesion();
+        obsListSessions = FXCollections.observableArrayList(arrayListSessions);
+        groupData = singleton.getGym().getGrupos();    
+        groupObsList = FXCollections.observableArrayList(groupData);
     }   
     
     
@@ -134,15 +144,43 @@ public class FXMLMainWindowController implements Initializable {
     }
 
     @FXML
-    private void onClickMenuBarAddGroup(ActionEvent event) {
+    private void onClickMenuBarManageGroups(ActionEvent event) {
+        onClickManageGroups(event);
+    }
+    
+    @FXML
+    private void onClickMenuBarAddGroup(ActionEvent event) { //Or should we make FXMLManageGroupsController.onClickAddGroup public?
+        /*Open window*/
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAddModifyGroup.fxml"));
+            AnchorPane root = (AnchorPane) loader.load();
+            Stage stage = new Stage();
+            FXMLAddModifyGroupController AddGroupController = loader.<FXMLAddModifyGroupController>getController();
+            AddGroupController.initStage(stage, singleton, null);
+            Scene scene = new Scene(root);  
+            stage.setScene(scene);
+            stage.setTitle("Add Group");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }
+        catch(IOException ioe){}
     }
 
-    @FXML
-    private void onClickMenuBarModifyGroup(ActionEvent event) {
-    }
 
     @FXML
     private void onClickMenuBarAddTemplate(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAddTemplate.fxml"));
+            AnchorPane root = (AnchorPane) loader.load();
+            Stage stage = new Stage();
+            FXMLAddTemplateController AddTemplateController = loader.<FXMLAddTemplateController>getController();
+            FXMLAddTemplateController.initStage(stage);
+            Scene scene = new Scene(root);  
+            stage.setScene(scene);
+            stage.setTitle("New Template");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }catch(Exception e){}
     }
     
     

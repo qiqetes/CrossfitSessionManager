@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="crossfitsessionmanager.FXMLManageGroupsController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLManageGroupsController">
    <children>
       <HBox prefHeight="800.0" prefWidth="1000.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
          <children>
@@ -30,12 +29,12 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickModify" prefHeight="40.0" prefWidth="678.0" text="Modify">
+                  <Button fx:id="bModify" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickModify" prefHeight="40.0" prefWidth="678.0" text="Modify">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#onClickShowStats" prefHeight="40.0" prefWidth="678.0" text="Show Stats">
+                  <Button fx:id="bShowStats" layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#onClickShowStats" prefHeight="40.0" prefWidth="678.0" text="Show Stats">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>

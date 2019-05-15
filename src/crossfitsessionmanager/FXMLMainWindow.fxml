@@ -23,8 +23,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Groups">
             <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarManageGroups" text="Manage Groups" />
               <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarAddGroup" text="Add Group" />
-                  <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarModifyGroup" text="Modify Group" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Sessions">
