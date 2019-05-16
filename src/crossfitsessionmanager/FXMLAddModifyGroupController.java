@@ -80,9 +80,9 @@ public class FXMLAddModifyGroupController implements Initializable {
             }
         });        
     }    
-
+    
     @FXML
-    private void onClickbAdd(ActionEvent event) {
+    private void onClickAdd(ActionEvent event) {
         if(codeError && !modifyGroup){
             Utils.dialog(Alert.AlertType.ERROR, "Error", "Invalid input", "This code is already in use");
         //}else if(FXMLSessionTemplatesController.obsListSessions.isEmpty()){
@@ -92,22 +92,23 @@ public class FXMLAddModifyGroupController implements Initializable {
             g.setDescripcion(tADescription.getText());
             g.setDefaultTipoSesion(cBDefaultSession.getValue());
             
+            String s = "modified";
             /*Add the new group to the list*/
             if(!modifyGroup){                
                 FXMLMainWindowController.groupObsList.add(g);
                 singleton.getGym().getGrupos().add(g);
+                s = "created";
             }        
-            onClickbCancel(event);
+            onClickCancel(event);
             FXMLMainWindowController.alreadySaved = false;
-            Utils.dialog(Alert.AlertType.INFORMATION, "Successfully created", "Template was created successfully", null);
+            Utils.dialog(Alert.AlertType.INFORMATION, "Successfully " + s, "Template was "+ s+ " successfully", null);
             
             /*Refresh TableView*/
             
         }
     }
-
     @FXML
-    private void onClickbCancel(ActionEvent event) {
+    private void onClickCancel(ActionEvent event) {
         primaryStage.close();
     }
 
