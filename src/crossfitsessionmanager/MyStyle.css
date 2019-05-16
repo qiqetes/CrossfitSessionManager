@@ -70,6 +70,45 @@
     -fx-font-size: 18px;
 }
 
+.logic-button{
+   -fx-background-color: -col-accent;
+   -fx-background-radius: 10px;
+   -fx-border-radius: 10px;
+
+   -fx-text-fill: white;
+}
 .error{
     -fx-border-color: -col-accent-red;
+}
+
+
+/* Table view */
+.table-view{
+    -fx-selection-bar: -col-light;
+    -fx-background-color: white;
+}
+.table-cell:filled:selected {
+    -fx-text-fill: white;
+    -fx-background-color: white;
+}
+.table-cell:filled {
+    -fx-text-fill: -col-dark;
+}
+.table-cell{
+    -fx-background-color: white;
+}
+.table-view .column-header-background{
+    -fx-background-color: -col-accent;
+    -fx-text-fill: white;
+}
+.table-view .column-header {
+    -fx-background-color: -col-accent;
+    -fx-text-fill: white;
+}
+.table-row-cell:selected .table-cell {
+    -fx-background-color: -col-light;
+}
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
 }

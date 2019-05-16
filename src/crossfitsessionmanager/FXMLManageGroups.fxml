@@ -2,46 +2,71 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLManageGroupsController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1000.0" stylesheets="@MyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLManageGroupsController">
    <children>
-      <HBox prefHeight="800.0" prefWidth="1000.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
+      <HBox fillHeight="false" prefHeight="800.0" prefWidth="1000.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
-            <TableView fx:id="tableView" prefHeight="750.0" prefWidth="615.0" HBox.hgrow="ALWAYS">
-              <columns>
-                <TableColumn fx:id="colCode" prefWidth="107.0" text="Code" />
-                <TableColumn fx:id="colDefSession" prefWidth="162.0" text="DefaultSesion" />
-                  <TableColumn fx:id="colDescription" prefWidth="400.0" text="Description" />
-              </columns>
-            </TableView>
-            <VBox minWidth="200.0" prefHeight="750.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="20.0" top="100.0" />
-               </HBox.margin>
+            <VBox prefHeight="744.0" prefWidth="791.0" styleClass="card">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onClickAddGroup" prefHeight="40.0" prefWidth="678.0" text="Add Group">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Groups Manager" />
+                  <Separator prefWidth="200.0">
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets bottom="20.0" left="-30.0" right="-30.0" top="10.0" />
                      </VBox.margin>
-                  </Button>
-                  <Button fx:id="bModify" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickModify" prefHeight="40.0" prefWidth="678.0" text="Modify">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="bShowStats" layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#onClickShowStats" prefHeight="40.0" prefWidth="678.0" text="Show Stats">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </Button>
+                  </Separator>
+                  <TableView fx:id="tableView" prefHeight="635.0" prefWidth="415.0" VBox.vgrow="ALWAYS">
+                    <columns>
+                      <TableColumn fx:id="colCode" prefWidth="107.0" text="Code" />
+                      <TableColumn fx:id="colDefSession" prefWidth="162.0" text="DefaultSesion" />
+                        <TableColumn fx:id="colDescription" prefWidth="400.0" text="Description" />
+                    </columns>
+                  </TableView>
                </children>
+               <padding>
+                  <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+               </padding>
             </VBox>
+            <AnchorPane prefHeight="237.0" prefWidth="333.0" styleClass="card" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox minWidth="200.0" prefHeight="282.0" prefWidth="315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onClickAddGroup" prefHeight="40.0" prefWidth="678.0" styleClass="logic-button" text="Add Group">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="bModify" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickModify" prefHeight="40.0" prefWidth="678.0" styleClass="logic-button" text="Modify">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="bShowStats" layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#onClickShowStats" prefHeight="40.0" prefWidth="678.0" styleClass="logic-button" text="Show Stats">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </AnchorPane>
          </children>
+         <padding>
+            <Insets right="30.0" top="20.0" />
+         </padding>
       </HBox>
    </children>
 </AnchorPane>
