@@ -156,7 +156,7 @@ public class FXMLMainWindowController implements Initializable {
             AnchorPane root = (AnchorPane) loader.load();
             Stage stage = new Stage();
             FXMLAddModifyGroupController AddGroupController = loader.<FXMLAddModifyGroupController>getController();
-            AddGroupController.initStage(stage, singleton, null);
+            AddGroupController.initStage(stage, singleton, null, null);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Add Group");

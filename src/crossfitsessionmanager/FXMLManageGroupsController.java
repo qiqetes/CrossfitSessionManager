@@ -95,7 +95,7 @@ public class FXMLManageGroupsController implements Initializable {
             AnchorPane root = (AnchorPane) loader.load();
             Stage stage = new Stage();
             FXMLAddModifyGroupController AddModifyGroupController = loader.<FXMLAddModifyGroupController>getController();
-            AddModifyGroupController.initStage(stage, singleton, null);
+            AddModifyGroupController.initStage(stage, singleton, null, null);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Add Group");
@@ -113,7 +113,7 @@ public class FXMLManageGroupsController implements Initializable {
             Stage stage = new Stage();
             FXMLAddModifyGroupController AddModifyGroupController = loader.<FXMLAddModifyGroupController>getController();
             Grupo g = tableView.getSelectionModel().getSelectedItem();
-            AddModifyGroupController.initStage(stage, singleton, g);
+            AddModifyGroupController.initStage(stage, singleton, g, tableView);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Modify Group");

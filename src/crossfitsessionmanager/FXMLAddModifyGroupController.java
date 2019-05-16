@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -44,6 +45,8 @@ public class FXMLAddModifyGroupController implements Initializable {
     private Boolean modifyGroup = false;
     
     private boolean codeError;
+    
+    TableView refTableView;
     
     
     /**
@@ -109,12 +112,14 @@ public class FXMLAddModifyGroupController implements Initializable {
     }
     @FXML
     private void onClickCancel(ActionEvent event) {
+        refTableView.refresh();
         primaryStage.close();
     }
 
-    void initStage(Stage stage, AccesoBD singleton, Grupo grupo) {
+    void initStage(Stage stage, AccesoBD singleton, Grupo grupo, TableView tbleView) {
         primaryStage = stage;
         this.singleton = singleton;
+        this.refTableView = tbleView;
         /*Set fields to the values of the already-existing group*/
         if(grupo != null){
             g = grupo;
