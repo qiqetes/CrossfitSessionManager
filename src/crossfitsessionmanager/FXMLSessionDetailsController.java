@@ -34,18 +34,14 @@ public class FXMLSessionDetailsController implements Initializable {
     @FXML
     private Text lWorkTimeExer;
     @FXML
-    private Text lRepsCircuit;
-    @FXML
     private Text lRestTimeExer;
     @FXML
+    private Text lRepsCircuit;
+    @FXML
     private Text lRestTimeCircuits;
-    private Button bOk;
     
     private SesionTipo template;
-    @FXML
-    private Text lNofExer1;
-    @FXML
-    private Button bAdd;
+    
     
     
     
@@ -56,8 +52,9 @@ public class FXMLSessionDetailsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {        
     }    
 
+    @FXML
     private void onClickOk(ActionEvent event) {
-        bOk.getScene().getWindow().hide();
+        lCode.getScene().getWindow().hide();
     }
     
     void initStage(SesionTipo sT) {
@@ -71,12 +68,5 @@ public class FXMLSessionDetailsController implements Initializable {
         lRestTimeCircuits.setText(" " + template.getD_circuito());
     }
 
-    @FXML
-    private void onClickbCancel(ActionEvent event) {
-    }
-
-    @FXML
-    private void onClickbAdd(ActionEvent event) {
-    }
     
 }
