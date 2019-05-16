@@ -33,6 +33,8 @@ public class FXMLSessionDetailsController implements Initializable {
     @FXML
     private Label lWorkTimeExer;
     @FXML
+    private Label lRestTimeExer;
+    @FXML
     private Label lRepsCircuit;
     @FXML
     private Label lRestTimeCircuits;
@@ -40,6 +42,7 @@ public class FXMLSessionDetailsController implements Initializable {
     private Button bOk;
     
     private SesionTipo template;
+    
     
     
     /**
@@ -56,9 +59,13 @@ public class FXMLSessionDetailsController implements Initializable {
     
     void initStage(SesionTipo sT) {
         template = sT;  
-        System.out.println(template.getCodigo());
         lCode.setText(template.getCodigo());
         lWarmTime.setText(" " + template.getT_calentamiento());
+        lNofExer.setText(" " + template.getNum_ejercicios());
+        lWorkTimeExer.setText(" " + template.getT_ejercicio());
+        lRestTimeExer.setText(" " + template.getD_ejercicio());
+        lRepsCircuit.setText(" " + template.getNum_circuitos());
+        lRestTimeCircuits.setText(" " + template.getD_circuito());
     }
     
 }
