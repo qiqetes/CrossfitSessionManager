@@ -85,7 +85,10 @@ public class FXMLSessionTemplatesController implements Initializable {
             Stage stage = new Stage();
             FXMLSessionDetailsController SessionDetailsController = loader.<FXMLSessionDetailsController>getController();
             SesionTipo sT = listViewSessions.getSelectionModel().getSelectedItem();
-            FXMLSessionDetailsController.initStage(stage, sT);
+            
+            FXMLSessionDetailsController sesionDetailsController = loader.<FXMLSessionDetailsController>getController();
+            sesionDetailsController.initStage(sT);
+            
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Session Details");

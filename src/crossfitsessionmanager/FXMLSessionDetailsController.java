@@ -5,11 +5,14 @@
  */
 package crossfitsessionmanager;
 
+import accesoBD.AccesoBD;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import modelo.SesionTipo;
@@ -33,27 +36,29 @@ public class FXMLSessionDetailsController implements Initializable {
     private Label lRepsCircuit;
     @FXML
     private Label lRestTimeCircuits;
+    @FXML
+    private Button bOk;
     
-    private static Stage primaryStage;
-    private static SesionTipo template;
-    private static String s;
+    private SesionTipo template;
+    
     
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {        
     }    
 
     @FXML
     private void onClickOk(ActionEvent event) {
-        primaryStage.close();
+        bOk.getScene().getWindow().hide();
     }
     
-    static void initStage(Stage stage, SesionTipo sT) {
-        primaryStage = stage;
-        template = sT;
-        
-        
+    void initStage(SesionTipo sT) {
+        template = sT;  
+        System.out.println(template.getCodigo());
+        lCode.setText(template.getCodigo());
+        lWarmTime.setText(" " + template.getT_calentamiento());
     }
+    
 }
