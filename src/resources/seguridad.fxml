@@ -2,10 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,73 +10,70 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="bg" stylesheets="@../crossfitsessionmanager/MyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLAddTemplateController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../crossfitsessionmanager/MyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLSessionDetailsController">
    <children>
-      <VBox layoutX="25.0" layoutY="19.0" prefHeight="486.0" prefWidth="546.0" styleClass="card" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <VBox layoutX="70.0" layoutY="70.0" prefHeight="477.0" prefWidth="560.0" styleClass="card" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Add Group">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
+            <Text fx:id="lCode" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Add Session Template" />
             <Separator prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="20.0" left="-30.0" right="-30.0" top="10.0" />
-               </VBox.margin></Separator>
-            <Text layoutX="40.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Group Code">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <TextField fx:id="tFCode" promptText="Code" styleClass="inputField">
-               <VBox.margin>
-                  <Insets bottom="15.0" />
                </VBox.margin>
-            </TextField>
-            <Text layoutX="40.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Description">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <TextArea fx:id="tADescription" prefHeight="232.0" prefWidth="695.0" promptText="Description" styleClass="inputField" />
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="348.0" minWidth="10.0" prefWidth="191.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="504.0" minWidth="10.0" prefWidth="504.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            </Separator>
+            <GridPane prefHeight="401.0" prefWidth="520.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Default Template:">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <ComboBox fx:id="cBDefaultSession" prefHeight="31.0" prefWidth="497.0" GridPane.columnIndex="1">
+                  <Text layoutX="10.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Warm time:" />
+                  <Text layoutX="10.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Number of exercises" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
-                  </ComboBox>
+                  </Text>
+                  <Text layoutX="275.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Time per exercise" GridPane.rowIndex="2" />
+                  <Text layoutX="10.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Time to rest" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text layoutX="10.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Circuit repetitions" GridPane.rowIndex="4" />
+                  <Text layoutX="10.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Rest between Circuits" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text fx:id="lWarmTime" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="details-text" text="Text" GridPane.rowIndex="1" />
+                  <Text fx:id="lWorkTimeExer" layoutX="10.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="details-text" text="Text" GridPane.rowIndex="3" />
+                  <Text fx:id="lNofExer1" layoutX="360.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="details-text" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Text fx:id="lRepsCircuit" layoutX="10.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="details-text" text="Text" GridPane.rowIndex="5" />
+                  <Text fx:id="lNofExer" layoutX="360.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="details-text" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Text fx:id="lRestTimeCircuits" layoutX="10.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="details-text" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
-               <padding>
-                  <Insets top="25.0" />
-               </padding>
             </GridPane>
-            <AnchorPane prefHeight="50.0" prefWidth="515.0">
+            <AnchorPane prefHeight="77.0" prefWidth="720.0">
                <children>
-                  <Button fx:id="bAdd" mnemonicParsing="false" onAction="#onClickAdd" styleClass="button-continue" text="Add" AnchorPane.rightAnchor="0.0">
+                  <Button mnemonicParsing="false" onAction="#onClickbCancel" styleClass="button-cancel" text="Cancel" />
+                  <Button fx:id="bAdd" mnemonicParsing="false" onAction="#onClickbAdd" styleClass="button-continue" text="Add" AnchorPane.rightAnchor="0.0">
                      <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="i-ok">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@ok-white.png" />
                            </image>
                         </ImageView>
-                     </graphic></Button>
-                  <Button mnemonicParsing="false" onAction="#onClickCancel" styleClass="button-cancel" text="Cancel" />
+                     </graphic>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets top="40.0" />
@@ -87,7 +81,7 @@
             </AnchorPane>
          </children>
          <padding>
-            <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+            <Insets bottom="10.0" left="30.0" right="30.0" top="15.0" />
          </padding>
       </VBox>
    </children>

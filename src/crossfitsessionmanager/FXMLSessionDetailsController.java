@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import modelo.SesionTipo;
 
@@ -25,21 +26,24 @@ import modelo.SesionTipo;
 public class FXMLSessionDetailsController implements Initializable {
 
     @FXML
-    private Label lCode;
+    private Text lCode;
     @FXML
-    private Label lWarmTime;
+    private Text lWarmTime;
     @FXML
-    private Label lNofExer;
+    private Text lNofExer;
     @FXML
-    private Label lWorkTimeExer;
+    private Text lWorkTimeExer;
     @FXML
-    private Label lRepsCircuit;
+    private Text lRepsCircuit;
     @FXML
-    private Label lRestTimeCircuits;
-    @FXML
+    private Text lRestTimeCircuits;
     private Button bOk;
     
     private SesionTipo template;
+    @FXML
+    private Text lNofExer1;
+    @FXML
+    private Button bAdd;
     
     
     /**
@@ -49,7 +53,6 @@ public class FXMLSessionDetailsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {        
     }    
 
-    @FXML
     private void onClickOk(ActionEvent event) {
         bOk.getScene().getWindow().hide();
     }
@@ -59,6 +62,14 @@ public class FXMLSessionDetailsController implements Initializable {
         System.out.println(template.getCodigo());
         lCode.setText(template.getCodigo());
         lWarmTime.setText(" " + template.getT_calentamiento());
+    }
+
+    @FXML
+    private void onClickbCancel(ActionEvent event) {
+    }
+
+    @FXML
+    private void onClickbAdd(ActionEvent event) {
     }
     
 }
