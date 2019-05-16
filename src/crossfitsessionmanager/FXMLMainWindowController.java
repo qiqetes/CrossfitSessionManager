@@ -93,11 +93,11 @@ public class FXMLMainWindowController implements Initializable {
     private void onClickStartSession(ActionEvent event) {
         /*Open window*/
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLIntervalTimer.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLPreStartSession.fxml"));
             AnchorPane root = (AnchorPane) loader.load();
             Stage stage = new Stage();
-            FXMLIntervalTimerController IntervalTimerController = loader.<FXMLIntervalTimerController>getController();
-            FXMLIntervalTimerController.initStage();
+            FXMLPreStartSessionController preStartSession = loader.<FXMLPreStartSessionController>getController();
+            preStartSession.initStage(singleton);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Interval Timer");
