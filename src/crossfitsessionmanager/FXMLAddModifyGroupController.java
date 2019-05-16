@@ -112,7 +112,8 @@ public class FXMLAddModifyGroupController implements Initializable {
     }
     @FXML
     private void onClickCancel(ActionEvent event) {
-        refTableView.refresh();
+        if(refTableView != null)
+            refTableView.refresh();
         primaryStage.close();
     }
 

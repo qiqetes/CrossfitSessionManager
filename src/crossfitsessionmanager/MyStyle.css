@@ -4,6 +4,7 @@
     -col-dark: #323D4A;
     -col-greyed: #9097A0;   
     -col-accent: #269AF3;
+    -col-accent-red: red;
     -col-shadow: #555555;
 }
 
@@ -38,6 +39,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 24px;
 }
+
 .inputField{
     -fx-background-color:  white;
     -fx-background-radius: 10px;
@@ -66,4 +68,8 @@
     -fx-background-color: transparent;
     -fx-text-fill: -col-accent;
     -fx-font-size: 18px;
+}
+
+.error{
+    -fx-border-color: -col-accent-red;
 }

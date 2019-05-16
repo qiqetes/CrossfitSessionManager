@@ -73,8 +73,10 @@ public class FXMLAddTemplateController implements Initializable {
             if(Utils.isCodeRepeatedTemplates(singleton, newVal)){
                 codeError = true;
                 // TODO: add some kind of visual indicator
+                addError(tFCode);
             }else{
                 codeError = false;
+                removeError(tFCode);
             }
             //codeError = (Utils.isCodeRepeated(singleton, newVal)) ? true:false;
         });
@@ -82,49 +84,61 @@ public class FXMLAddTemplateController implements Initializable {
         tFCircuitReps.textProperty().addListener((observable, oldVal,newVal)->{
             if(!Utils.isNumeric( newVal)){
                 repsError = true;
+                addError(tFCircuitReps);
                 // TODO: add some kind of visual indicator
             }else{
                 repsError = false;
+                removeError(tFCircuitReps);
             }
         });
         tFExerWorkingTime.textProperty().addListener((observable, oldVal,newVal)->{
             if(!Utils.isNumeric( newVal)){
                 workingtimeError = true;
+                addError(tFExerWorkingTime);
                 // TODO: add some kind of visual indicator
             }else{
                 workingtimeError = false;
+                removeError(tFExerWorkingTime);
             }
         });
         tFNExercises.textProperty().addListener((observable, oldVal,newVal)->{
             if(!Utils.isNumeric( newVal)){
                 exercisesError = true;
+                addError(tFNExercises);
                 // TODO: add some kind of visual indicator
             }else{
                 exercisesError = false;
+                removeError(tFNExercises);
             }
         });
         tFRestCircuits.textProperty().addListener((observable, oldVal,newVal)->{
             if(!Utils.isNumeric( newVal)){
                 restcircuError = true;
+                addError(tFRestCircuits);
                 // TODO: add some kind of visual indicator
             }else{
                 restcircuError = false;
+                removeError(tFRestCircuits);
             }
         });
         tFWarmTime.textProperty().addListener((observable, oldVal,newVal)->{
             if(!Utils.isNumeric( newVal)){
                 warmtimeError = true;
+                addError(tFWarmTime);
                 // TODO: add some kind of visual indicator
             }else{
                 warmtimeError = false;
+                removeError(tFWarmTime);
             }
         });
         tFRestExercises.textProperty().addListener((observable, oldVal,newVal)->{
             if(!Utils.isNumeric( newVal)){
                 restexercisesError = true;
+                addError(tFRestExercises);
                 // TODO: add some kind of visual indicator
             }else{
                 restexercisesError = false;
+                removeError(tFRestExercises);
             }
         });
     }    
@@ -175,4 +189,15 @@ public class FXMLAddTemplateController implements Initializable {
         bAdd.disableProperty().bind(boolB);
     }
     
+    
+    private void addError(TextField tf){
+        if(!tf.getStyleClass().contains("error")){
+            tf.getStyleClass().add("error");
+        }
+    }
+    private void removeError(TextField tf){
+        if(tf.getStyleClass().contains("error")){
+                    tf.getStyleClass().remove("error");
+        }
+    }
 }

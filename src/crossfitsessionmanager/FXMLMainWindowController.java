@@ -135,12 +135,8 @@ public class FXMLMainWindowController implements Initializable {
     @FXML
     private void onClickMenuBarClose(ActionEvent event) {
         //If the changes have not already been saved -> Save Dialog
-        if(!alreadySaved){saveDialog();
-        }else{
-            /*Borrar: Stage stage = (Stage) bStartSession.getScene().getWindow();
-            stage.close();*/
-            Platform.exit();
-        }
+        if(!alreadySaved){saveDialog();}
+        else{Platform.exit();}
     }
 
     @FXML
