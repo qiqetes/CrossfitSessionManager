@@ -4,12 +4,40 @@
     -col-dark: #323D4A;
     -col-greyed: #9097A0;   
     -col-accent: #269AF3;
+    -col-shadow: #555555;
+}
+
+@font-face {
+    src: url('../resources/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    src: url('../resources/OpenSans-SemiBold.ttf');
+}
+
+
+.root{
+    -fx-font-family: 'Open Sans';   
+    -fx-background-color: -col-light;
 }
 
 .bg{
     -fx-background-color: -col-light;
 }
 
+.subtitle{
+    -fx-text-fill: -col-accent;
+    -fx-fill: -col-greyed;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+.title{
+    -fx-text-fill: -col-accent;
+    -fx-fill: -col-dark;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+}
 .inputField{
     -fx-background-color:  white;
     -fx-background-radius: 10px;
@@ -19,4 +47,23 @@
     -fx-text-fill: -col-dark;
     -fx-font-size: 18px;
     -fx-prompt-text-fill: -col-greyed;
+}
+
+.card{
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, -col-shadow, 10, 0, 0, 5);
+    -fx-background-radius: 15px;
+}
+
+.button-continue{
+    -fx-background-color: -col-accent;
+    -fx-text-fill: white;
+    
+    -fx-font-size: 18px;
+}
+
+.button-cancel{
+    -fx-background-color: transparent;
+    -fx-text-fill: -col-accent;
+    -fx-font-size: 18px;
 }
