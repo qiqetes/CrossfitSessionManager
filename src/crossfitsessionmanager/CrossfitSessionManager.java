@@ -26,7 +26,6 @@ public class CrossfitSessionManager extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLMainWindow.fxml"));
             AnchorPane root = (AnchorPane) loader.load();
             FXMLMainWindowController MainWindowController = loader.<FXMLMainWindowController>getController();
-            FXMLIntervalTimerController.initStage();
             Scene scene = new Scene(root);  
             MainWindowController.initStage(stage);
             stage.setScene(scene);

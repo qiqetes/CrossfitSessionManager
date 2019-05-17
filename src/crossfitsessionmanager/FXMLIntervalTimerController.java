@@ -6,8 +6,13 @@
 package crossfitsessionmanager;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import modelo.Grupo;
+import modelo.SesionTipo;
 
 /**
  * FXML Controller class
@@ -16,15 +21,21 @@ import javafx.fxml.Initializable;
  */
 public class FXMLIntervalTimerController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    private SesionTipo template;
+    private Grupo group;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        startTime = LocalDateTime.now();
     }    
     
-    static void initStage() {
-        
+    public void initStage(SesionTipo sT, Grupo g) {
+        template = sT;
+        System.out.println(template.getCodigo());
+        group = g;
+        System.out.println(group);
     }
 }

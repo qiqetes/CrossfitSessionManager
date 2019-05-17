@@ -85,12 +85,15 @@ public class FXMLPreStartSessionController implements Initializable {
             AnchorPane root = (AnchorPane) loader.load();
             Stage stage = new Stage();
             FXMLIntervalTimerController intervalTimer = loader.<FXMLIntervalTimerController>getController();
-            intervalTimer.initStage();
+            SesionTipo sT = cbSessionTemplate.getValue();
+            Grupo g = cbGroup.getValue();
+            intervalTimer.initStage(sT, g);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Interval Timer");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
+            cbGroup.getScene().getWindow().hide();
         }
         catch(IOException ioe){ioe.printStackTrace();}
     }

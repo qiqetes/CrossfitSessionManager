@@ -112,3 +112,30 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
+
+
+
+.details-text{
+    -fx-text-fill: -col-dark;
+    -fx-font-size: 20;
+    -fx-padding: 0 0 100 0;
+}
+
+
+.support-message{
+    -fx-font-size: 50px;
+}
+.timer-text{
+    -fx-font-size: 200px;
+}
+.round-box{
+    background-color: white;
+    -fx-border-color: -col-accent;
+    -fx-border-radius: 100%;
+    -fx-border-width: 10px;
+}
+
+.play-button{
+    -fx-background-radius: 100%;
+    -fx-effect: dropshadow(three-pass-box, -col-shadow, 10, 0, 0, 5);
+}

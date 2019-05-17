@@ -1,11 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.gluonhq.charm.glisten.control.ProgressIndicator?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLIntervalTimerController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@MyStyle.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="crossfitsessionmanager.FXMLIntervalTimerController">
+   <children>
+      <VBox layoutX="910.0" layoutY="440.0" prefHeight="200.0" prefWidth="100.0" styleClass="card" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <GridPane layoutX="10.0" layoutY="117.0" prefHeight="95.0" prefWidth="1880.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" text="ALMOST THERE!" textAlignment="CENTER" wrappingWidth="607.0042304992676" GridPane.halignment="CENTER" />
+               </children>
+            </GridPane>
+            <GridPane prefHeight="680.0" prefWidth="2138.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" styleClass="round-box" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="timer-text" text="44">
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                        </Text>
+                        <ProgressIndicator prefWidth="608.0" progress="0.0" radius="300.0">
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                        </ProgressIndicator>
+                     </children>
+                  </StackPane>
+               </children>
+            </GridPane>
+            <GridPane layoutX="10.0" layoutY="10.0" prefHeight="95.0" prefWidth="1880.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" text="3 exercises left" textAlignment="CENTER" wrappingWidth="607.0042304992676" GridPane.halignment="CENTER" />
+               </children>
+            </GridPane>
+            <GridPane layoutX="10.0" layoutY="797.0" prefHeight="116.0" prefWidth="2138.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <GridPane prefHeight="160.0" prefWidth="713.0" GridPane.columnIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="play-button" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="53.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/play-white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="274.0" layoutY="18.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="play-button" GridPane.columnIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/skip-white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
