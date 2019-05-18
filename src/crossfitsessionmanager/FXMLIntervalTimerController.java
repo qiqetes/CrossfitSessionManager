@@ -114,43 +114,45 @@ public class FXMLIntervalTimerController implements Initializable {
                     break;
                 }
                 long next;
-                /*If there is warming time*/
-                while(started){
-                if(WarmT != 0){
-                    setTimeCrono(WarmT);
-                    next = secTotal;
-                    while(started && next != 0){
-                        next = calcula();
-                    }
-                }
                 
-                for(int i = CircN; i > 0; i--){ //Repeats the circuit
-                    for(int j = ExerN; j > 0; j--){ //Number of exercises
-                        setTimeCrono(ExerT);
+                while(started){
+                    /*If there is warming time*/
+                    if(WarmT > -1){
+                        setTimeCrono(WarmT);
                         next = secTotal;
                         while(started && next != 0){
                             next = calcula();
                         }
-                        if(j>1){    //Last time there is no resting time for exercises, but for circuit
-                            setTimeCrono(ExerRest);
+                    }
+
+                    for(int i = CircN; i > 0; i--){ //Repeats the circuit
+                        for(int j = ExerN; j > 0; j--){ //Number of exercises
+                            setTimeCrono(ExerT);
                             next = secTotal;
-                            while(started && next != 0){
+                            while(started && next != -1){
                                 next = calcula();
-                            } 
-                        }                  
-                    }
-                    if(i>1){    //Last time there is nor resting time for circuit neither exercise
-                        setTimeCrono(CircRest);
-                        next = secTotal;
-                        while(started && next != 0){
-                            next = calcula();
+                            }
+                            if(j>1){    //Last time there is no resting time for exercises, but for circuit
+                                setTimeCrono(ExerRest);
+                                next = secTotal;
+                                while(started && next != -1){
+                                    next = calcula();
+                                } 
+                            }                  
                         }
-                    }else{
-                        System.err.println("Cancelling");
-                        started = false;
-                        cancel();
-                    }
-                }   
+                        if(i>1){    //Last time there is nor resting time for circuit neither exercise
+                            setTimeCrono(CircRest);
+                            next = secTotal;
+                            while(started && next != -1){
+                                next = calcula();
+                            }
+                        }else{
+                            System.err.println("Cancelling");
+                            updateMessage("0");
+                            started = false;
+                            cancel();
+                        }
+                    }   
                 }
             }
             return null;
