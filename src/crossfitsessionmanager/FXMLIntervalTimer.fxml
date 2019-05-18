@@ -5,101 +5,98 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@MyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLIntervalTimerController">
+<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" styleClass="timer-root" stylesheets="@MyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLIntervalTimerController">
    <children>
-      <VBox layoutX="910.0" layoutY="440.0" prefHeight="200.0" prefWidth="100.0" styleClass="card" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <VBox alignment="CENTER" layoutX="412.0" layoutY="440.0" minHeight="0.0" prefHeight="1040.0" prefWidth="1488.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="20.0">
          <children>
-            <GridPane layoutX="10.0" layoutY="117.0" prefHeight="95.0" prefWidth="1880.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
+            <Text fx:id="lTrainingMode" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-timer" text="WARMING TIME" textAlignment="CENTER" wrappingWidth="902.236328125" />
+            <Text fx:id="lDisplayedMsg" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" text="ALMOST THERE!" textAlignment="CENTER" wrappingWidth="607.0042304992676" />
+            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="504.0" styleClass="round-box">
                <children>
-                  <Text fx:id="lDisplayedMsg" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" text="ALMOST THERE!" textAlignment="CENTER" wrappingWidth="607.0042304992676" GridPane.halignment="CENTER" />
+                  <Text fx:id="lTime" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="timer-text" text="44">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </Text>
                </children>
-            </GridPane>
-            <GridPane prefHeight="680.0" prefWidth="2138.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </StackPane>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" text="3 exercises left" textAlignment="CENTER" wrappingWidth="607.0042304992676">
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </Text>
+            <HBox alignment="CENTER" maxWidth="20.0" minWidth="200.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" styleClass="round-box" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <children>
-                        <Text fx:id="lTime" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="timer-text" text="44">
-                           <StackPane.margin>
-                              <Insets />
-                           </StackPane.margin>
-                        </Text>
-                     </children>
-                  </StackPane>
+                  <Button mnemonicParsing="false" onAction="#onClickPlay" prefHeight="100.0" prefWidth="100.0" styleClass="play-button">
+                     <graphic>
+                        <ImageView fitHeight="100.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/play-white.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onClickSkip" prefHeight="70.0" prefWidth="70.0" styleClass="play-button">
+                     <graphic>
+                        <ImageView fitHeight="78.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/skip-white.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
-            </GridPane>
-            <GridPane layoutX="10.0" layoutY="10.0" prefHeight="95.0" prefWidth="1880.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" text="3 exercises left" textAlignment="CENTER" wrappingWidth="607.0042304992676" GridPane.halignment="CENTER" />
-               </children>
-            </GridPane>
-            <GridPane layoutX="10.0" layoutY="797.0" prefHeight="116.0" prefWidth="2138.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <GridPane prefHeight="160.0" prefWidth="713.0" GridPane.columnIndex="1">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#onClickPlay" prefHeight="100.0" prefWidth="100.0" styleClass="play-button" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-                           <graphic>
-                              <ImageView fitHeight="53.0" fitWidth="49.0" onDragDetected="#onClickPlay" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/play-white.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button layoutX="274.0" layoutY="18.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="play-button" GridPane.columnIndex="2">
-                           <graphic>
-                              <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/skip-white.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </GridPane>
-               </children>
-            </GridPane>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
          </children>
       </VBox>
+      <VBox alignment="CENTER" layoutX="109.0" layoutY="462.0" prefHeight="179.0" prefWidth="396.0" styleClass="card">
+         <children>
+            <Text fx:id="lGroup" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Grupo de tardes" textAlignment="CENTER" wrappingWidth="289.92966651916504" />
+            <Text fx:id="lSesionTipo" layoutX="59.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Sesion canyera" textAlignment="CENTER" wrappingWidth="289.92966651916504">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" maxWidth="20.0" minWidth="200.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onClickReset" prefHeight="80.0" prefWidth="78.0" styleClass="play-button">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/restaart-white.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onClickQuit" prefHeight="70.0" prefWidth="70.0" styleClass="play-button">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/cross.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

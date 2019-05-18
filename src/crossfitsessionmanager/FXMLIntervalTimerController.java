@@ -42,18 +42,24 @@ public class FXMLIntervalTimerController implements Initializable {
     private Text lDisplayedMsg;
     @FXML
     private Text lTime;
+    @FXML
+    private Text lTrainingMode;
+    @FXML
+    private Text lGroup;
+    @FXML
+    private Text lSesionTipo;
     
     private SesionTipo template;
     private Grupo group;
-    
     private MyCronoTask task;
+    
         
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb) {       
+        
         task = new MyCronoTask();      
         task.initTimeVariables(0,3,2,3,2,5);
-                //template.getT_calentamiento(), template.getT_ejercicio(), template.getD_ejercicio(),template.getNum_ejercicios(),template.getNum_circuitos(),template.getD_circuito());
+        //template.getT_calentamiento(), template.getT_ejercicio(), template.getD_ejercicio(),template.getNum_ejercicios(),template.getNum_circuitos(),template.getD_circuito());
         Thread hilo = new Thread(task);
         hilo.setDaemon(true);
         hilo.start();
@@ -64,11 +70,26 @@ public class FXMLIntervalTimerController implements Initializable {
     public void initStage(SesionTipo sT, Grupo g) {
         template = sT;
         group = g;
+        lGroup.setText(group.getCodigo());
+        lSesionTipo.setText(template.getCodigo());
     }
 
     @FXML
     private void onClickPlay(ActionEvent event) {
         task.startTimer();
+    }
+
+
+    @FXML
+    private void onClickSkip(ActionEvent event) {
+    }
+
+    @FXML
+    private void onClickReset(ActionEvent event) {
+    }
+
+    @FXML
+    private void onClickQuit(ActionEvent event) {
     }
 
     class MyCronoTask extends Task<Void>{

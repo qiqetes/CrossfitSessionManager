@@ -20,7 +20,7 @@
 
 .root{
     -fx-font-family: 'Open Sans';   
-    -fx-background-color: transparent;
+    -fx-background-color: -col-light;
 }
 
 .bg{
@@ -129,14 +129,17 @@
     -fx-font-size: 200px;
 }
 .round-box{
-    background-color: white;
-    -fx-border-color: -col-accent;
+    -fx-background-color: #42ceb2;
+    -fx-background-radius: 100%;
+    -fx-border-color: white;
     -fx-border-radius: 100%;
     -fx-border-width: 10px;
+    -fx-effect: dropshadow(three-pass-box, -col-shadow, 10, 0, 0, 5);
 }
 
 .play-button{
     -fx-background-radius: 100%;
+    -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, -col-shadow, 10, 0, 0, 5);
 }
 
@@ -150,4 +153,12 @@
      -fx-font-size: 25px;
     -fx-background-color: black;
     -fx-text-fill: white;
+}
+
+.timer-root{
+    -fx-background-color: #42ceb2;
+}
+.title-timer{
+    -fx-font-size: 70px;
+    -fx-font-weight: bold;
 }

@@ -58,7 +58,7 @@
                </rowConstraints>
                <children>
                   <Button mnemonicParsing="false" onAction="#onClickManageGroups" styleClass="button-start" text="MANAGE GROUPS" GridPane.halignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#onClickStartSession" prefHeight="102.0" prefWidth="240.0" styleClass="button-start bigger" text="START SESSION" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#onClickStartSession" prefHeight="102.0" prefWidth="240.0" styleClass="bigger" text="START SESSION" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#onClickSessionTemplates" styleClass="button-start" text="Session Templates" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
