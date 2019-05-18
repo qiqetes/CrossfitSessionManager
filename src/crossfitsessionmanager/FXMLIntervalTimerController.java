@@ -51,9 +51,9 @@ public class FXMLIntervalTimerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        task = new MyCronoTask();
-        task.setTimeCrono(30);
-        
+        task = new MyCronoTask();      
+        task.initTimeVariables(0,3,2,3,2,5);
+                //template.getT_calentamiento(), template.getT_ejercicio(), template.getD_ejercicio(),template.getNum_ejercicios(),template.getNum_circuitos(),template.getD_circuito());
         Thread hilo = new Thread(task);
         hilo.setDaemon(true);
         hilo.start();
@@ -77,6 +77,8 @@ public class FXMLIntervalTimerController implements Initializable {
         long secActual;
         long startTime;
         
+        int WarmT, ExerT, ExerRest, ExerN, CircN, CircRest;
+        
         void startTimer(){
             started = true;
             startTime = System.currentTimeMillis();
@@ -85,11 +87,17 @@ public class FXMLIntervalTimerController implements Initializable {
         void setTimeCrono(int sec){
             secTotal = sec;
             secActual = secTotal;
+            startTime = System.currentTimeMillis();
         }
         
-        void calcula() {
+        void initTimeVariables(int WarmT, int ExerT, int ExerRest, int ExerN, int CircN,int CircRest){
+            this.WarmT = WarmT; this.ExerT = ExerT; this.ExerRest = ExerRest; this.ExerN = ExerN; this.CircN = CircN; this.CircRest = CircRest;
+        }
+        
+        long calcula() {
             secActual = secTotal - (System.currentTimeMillis() - startTime)/1000;
             updateMessage("" + secActual);
+            return secActual;
         }
         
         @Override
@@ -105,9 +113,38 @@ public class FXMLIntervalTimerController implements Initializable {
                 if (isCancelled()) {
                     break;
                 }
-                while(started){
-                    calcula();
+                long next;
+                /*If there is warming time*/
+                if(WarmT != 0){
+                    setTimeCrono(WarmT);
+                    next = secTotal;
+                    while(started && next != 0){
+                        next = calcula();
+                    }
                 }
+                for(int i = CircN; i > 0; i--){ //Repeats the circuit
+                    for(int j = ExerN; j > 0; j--){ //Number of exercises
+                        setTimeCrono(ExerT);
+                        next = secTotal;
+                        while(started && next != 0){
+                            next = calcula();
+                        }
+                        if(j>1){    //Last time there is no resting time for exercises, but for circuit
+                            setTimeCrono(ExerRest);
+                            next = secTotal;
+                            while(started && next != 0){
+                                next = calcula();
+                            } 
+                        }                  
+                    }
+                    if(i>1){    //Last time there is nor resting time for circuit neither exercise
+                        setTimeCrono(CircRest);
+                        next = secTotal;
+                        while(started && next != 0){
+                            next = calcula();
+                        }
+                    }
+                }   
             }
             return null;
         }
