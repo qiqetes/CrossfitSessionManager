@@ -115,6 +115,7 @@ public class FXMLIntervalTimerController implements Initializable {
                 }
                 long next;
                 /*If there is warming time*/
+                while(started){
                 if(WarmT != 0){
                     setTimeCrono(WarmT);
                     next = secTotal;
@@ -122,6 +123,7 @@ public class FXMLIntervalTimerController implements Initializable {
                         next = calcula();
                     }
                 }
+                
                 for(int i = CircN; i > 0; i--){ //Repeats the circuit
                     for(int j = ExerN; j > 0; j--){ //Number of exercises
                         setTimeCrono(ExerT);
@@ -143,8 +145,13 @@ public class FXMLIntervalTimerController implements Initializable {
                         while(started && next != 0){
                             next = calcula();
                         }
+                    }else{
+                        System.err.println("Cancelling");
+                        started = false;
+                        cancel();
                     }
                 }   
+                }
             }
             return null;
         }
