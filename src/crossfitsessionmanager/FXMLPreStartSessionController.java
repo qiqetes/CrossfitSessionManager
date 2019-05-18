@@ -43,6 +43,7 @@ public class FXMLPreStartSessionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        /*ComboBox initialization*/
         cbSessionTemplate.setItems(FXMLMainWindowController.obsListSessions);
         cbSessionTemplate.setConverter(new StringConverter<SesionTipo>() {
 
@@ -70,6 +71,11 @@ public class FXMLPreStartSessionController implements Initializable {
                 throw new UnsupportedOperationException("DON'T USE ME!"); 
             }
         });     
+        
+        /*Listener that synchronizes the correspondinf default template session when selecting a group*/
+        cbGroup.valueProperty().addListener((observable, oldVal,newVal)->{
+            cbSessionTemplate.setValue(cbGroup.getValue().getDefaultTipoSesion());
+        });
     }    
 
     @FXML

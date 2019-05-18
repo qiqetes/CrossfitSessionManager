@@ -61,11 +61,11 @@ public class FXMLSessionDetailsController implements Initializable {
         template = sT;  
         lCode.setText(template.getCodigo());
         lWarmTime.setText(template.getT_calentamiento() + " seconds");
-        lNofExer.setText(" " + template.getNum_ejercicios() + " exercises" );
-        lWorkTimeExer.setText(" " + template.getT_ejercicio() + " seconds");
-        lRestTimeExer.setText(" " + template.getD_ejercicio() + " seconds");
-        lRepsCircuit.setText(" " + template.getNum_circuitos()  + " reps");
-        lRestTimeCircuits.setText(" " + template.getD_circuito() + " seconds");
+        lNofExer.setText(template.getNum_ejercicios() + " exercises" );
+        lWorkTimeExer.setText(template.getT_ejercicio() + " seconds");
+        lRestTimeExer.setText(template.getD_ejercicio() + " seconds");
+        lRepsCircuit.setText(template.getNum_circuitos()  + " reps");
+        lRestTimeCircuits.setText(template.getD_circuito() + " seconds");
     }
 
     

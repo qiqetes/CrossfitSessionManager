@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 import modelo.Grupo;
 import modelo.SesionTipo;
 
@@ -37,5 +39,9 @@ public class FXMLIntervalTimerController implements Initializable {
         System.out.println(template.getCodigo());
         group = g;
         System.out.println(group);
+    }
+
+    @FXML
+    private void onClickPlay(MouseEvent event) {
     }
 }
