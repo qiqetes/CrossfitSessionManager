@@ -23,6 +23,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.SesionTipo;
 
 /**
@@ -58,6 +59,7 @@ public class FXMLSessionTemplatesController implements Initializable {
     
     public static void initStage(Stage stage) {
         primaryStage = stage;
+        primaryStage.initStyle(StageStyle.UNDECORATED);
     }
 
     @FXML
@@ -66,8 +68,8 @@ public class FXMLSessionTemplatesController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAddTemplate.fxml"));
             AnchorPane root = (AnchorPane) loader.load();
             Stage stage = new Stage();
-            FXMLAddTemplateController AddTemplateController = loader.<FXMLAddTemplateController>getController();
-            FXMLAddTemplateController.initStage(stage);
+            FXMLAddTemplateController addTemplateController = loader.<FXMLAddTemplateController>getController();
+            addTemplateController.initStage(stage);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("New Template");
@@ -87,7 +89,7 @@ public class FXMLSessionTemplatesController implements Initializable {
             SesionTipo sT = listViewSessions.getSelectionModel().getSelectedItem();
             
             FXMLSessionDetailsController sesionDetailsController = loader.<FXMLSessionDetailsController>getController();
-            sesionDetailsController.initStage(sT);
+            sesionDetailsController.initStage(sT, stage);
             
             Scene scene = new Scene(root);  
             stage.setScene(scene);

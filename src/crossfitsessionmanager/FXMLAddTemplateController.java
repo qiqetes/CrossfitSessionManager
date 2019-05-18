@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.SesionTipo;
 
 /**
@@ -27,8 +28,6 @@ import modelo.SesionTipo;
  */
 public class FXMLAddTemplateController implements Initializable {
 
-    static void initStage(Stage stage) {
-    }
     @FXML
     private TextField tFCode;
     @FXML
@@ -49,7 +48,7 @@ public class FXMLAddTemplateController implements Initializable {
     private AccesoBD singleton;
     private SesionTipo sesionTipo;
     private TextField[] sesionTipoAttr;
-    
+    private Stage primaryStage;
     
     private boolean codeError;
     private boolean warmtimeError;
@@ -162,8 +161,7 @@ public class FXMLAddTemplateController implements Initializable {
 
     @FXML
     private void onClickbCancel(ActionEvent event) {
-        Node n = (Node) event.getSource();
-        n.getScene().getWindow().hide();
+        primaryStage.close();
     }
     
     private void createTemplate(){
@@ -187,6 +185,11 @@ public class FXMLAddTemplateController implements Initializable {
                                 tFCircuitReps.textProperty().isEmpty().or(
                                 tFRestCircuits.textProperty().isEmpty()))))));
         bAdd.disableProperty().bind(boolB);
+    }
+    
+    public void initStage(Stage stage) {
+        primaryStage = stage;
+        primaryStage.initStyle(StageStyle.UNDECORATED);
     }
     
     

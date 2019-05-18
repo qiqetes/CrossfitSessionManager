@@ -31,7 +31,7 @@
                <children>
                   <VBox minWidth="200.0" prefHeight="168.0" prefWidth="246.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#bAddTemplate" prefHeight="40.0" prefWidth="678.0" styleClass="logic-button" text="Add Group">
+                        <Button mnemonicParsing="false" onAction="#bAddTemplate" prefHeight="40.0" prefWidth="678.0" styleClass="logic-button" text="Add Template">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>

@@ -19,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 import modelo.Grupo;
 import modelo.SesionTipo;
@@ -72,6 +73,12 @@ public class FXMLPreStartSessionController implements Initializable {
             }
         });     
         
+        /*Set a default group and session template for the comboBoxes when opening the window*/
+        if(FXMLMainWindowController.groupObsList.get(0) != null){
+            cbGroup.setValue(FXMLMainWindowController.groupObsList.get(0));
+            cbSessionTemplate.setValue(FXMLMainWindowController.groupObsList.get(0).getDefaultTipoSesion());
+        }
+        
         /*Listener that synchronizes the correspondinf default template session when selecting a group*/
         cbGroup.valueProperty().addListener((observable, oldVal,newVal)->{
             cbSessionTemplate.setValue(cbGroup.getValue().getDefaultTipoSesion());
@@ -80,7 +87,7 @@ public class FXMLPreStartSessionController implements Initializable {
 
     @FXML
     private void onClickCancel(ActionEvent event) {
-         cbGroup.getScene().getWindow().hide();
+         primaryStage.close();
     }
 
     @FXML
@@ -104,8 +111,10 @@ public class FXMLPreStartSessionController implements Initializable {
         catch(IOException ioe){ioe.printStackTrace();}
     }
 
-    void initStage(AccesoBD singleton) {
+    public void initStage(AccesoBD singleton, Stage stage) {
         this.singleton = singleton;
+        primaryStage = stage;
+        primaryStage.initStyle(StageStyle.UNDECORATED);
     }
     
 }

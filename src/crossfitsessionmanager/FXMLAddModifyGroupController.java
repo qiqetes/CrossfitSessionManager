@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 import modelo.Grupo;
 import modelo.SesionTipo;
@@ -81,7 +82,7 @@ public class FXMLAddModifyGroupController implements Initializable {
             public SesionTipo fromString(String string) {
                 throw new UnsupportedOperationException("DON'T USE ME!"); 
             }
-        });        
+        });                
     }    
     
     @FXML
@@ -119,6 +120,7 @@ public class FXMLAddModifyGroupController implements Initializable {
 
     void initStage(Stage stage, AccesoBD singleton, Grupo grupo, TableView tbleView) {
         primaryStage = stage;
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         this.singleton = singleton;
         this.refTableView = tbleView;
         /*Set fields to the values of the already-existing group*/
@@ -134,6 +136,8 @@ public class FXMLAddModifyGroupController implements Initializable {
         /*Create new group otherwise*/
         else{
             g = new Grupo();
+            /*Set default value for ComboBox when opening the window to add a new group*/
+            if(FXMLMainWindowController.obsListSessions.get(0) != null){cBDefaultSession.setValue(FXMLMainWindowController.obsListSessions.get(0));}
         }
     }
 
