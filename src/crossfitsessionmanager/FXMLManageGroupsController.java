@@ -28,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.Grupo;
 import modelo.SesionTipo;
 
@@ -51,7 +52,8 @@ public class FXMLManageGroupsController implements Initializable {
     @FXML
     private Button bShowStats;
     
-    AccesoBD singleton;
+    private AccesoBD singleton;
+    private Stage primaryStage;
     
     
     
@@ -83,8 +85,9 @@ public class FXMLManageGroupsController implements Initializable {
 
     }    
     
-    static void initStage() {
-        
+    public void initStage(Stage stage) {
+        primaryStage = stage;
+        primaryStage.initStyle(StageStyle.UNDECORATED);
     }
 
     @FXML

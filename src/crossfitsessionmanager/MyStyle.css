@@ -20,7 +20,7 @@
 
 .root{
     -fx-font-family: 'Open Sans';   
-    -fx-background-color: -col-light;
+    -fx-background-color: transparent;
 }
 
 .bg{

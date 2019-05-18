@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.SesionTipo;
 
 /**
@@ -49,7 +50,7 @@ public class FXMLSessionDetailsController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
+    public void initialize(URL url, ResourceBundle rb) {            
     }    
 
     @FXML
@@ -57,8 +58,9 @@ public class FXMLSessionDetailsController implements Initializable {
         lCode.getScene().getWindow().hide();
     }
     
-    void initStage(SesionTipo sT) {
+    void initStage(SesionTipo sT, Stage stage) {
         template = sT;  
+        stage.initStyle(StageStyle.UNDECORATED);
         lCode.setText(template.getCodigo());
         lWarmTime.setText(template.getT_calentamiento() + " seconds");
         lNofExer.setText(template.getNum_ejercicios() + " exercises" );
