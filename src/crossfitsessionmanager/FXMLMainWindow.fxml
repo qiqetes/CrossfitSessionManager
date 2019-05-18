@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -11,8 +12,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLMainWindowController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@MyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLMainWindowController">
    <children>
+      <ImageView fitHeight="840.0" fitWidth="1215.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../resources/BG.png" />
+         </image>
+      </ImageView>
       <MenuBar prefHeight="25.0" prefWidth="1200.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
@@ -43,17 +49,17 @@
             </AnchorPane>
             <GridPane prefHeight="279.0" prefWidth="1100.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="370.0" minWidth="10.0" prefWidth="370.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="374.0" minWidth="10.0" prefWidth="308.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="422.0" minWidth="10.0" prefWidth="392.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#onClickManageGroups" text="Manage Groups" />
-                  <Button mnemonicParsing="false" onAction="#onClickStartSession" text="Start Session" GridPane.columnIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#onClickSessionTemplates" text="Session Templates" GridPane.columnIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#onClickManageGroups" styleClass="button-start" text="MANAGE GROUPS" GridPane.halignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#onClickStartSession" prefHeight="102.0" prefWidth="240.0" styleClass="button-start bigger" text="START SESSION" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#onClickSessionTemplates" styleClass="button-start" text="Session Templates" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
          </children>

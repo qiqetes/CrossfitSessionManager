@@ -56,11 +56,34 @@ public class FXMLMainWindowController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*Initialize Global observableLists to use in every class: SessionTemplates and Groups*/
+        // Check if XML exists
+        // If it doesn't create a default session template
+        
+        if(singleton.getGym().getTiposSesion().isEmpty()){
+            System.out.println("No xml savedata found");
+            SesionTipo sesionDefault = new SesionTipo();
+            sesionDefault.setCodigo("Session Default");
+            sesionDefault.setD_circuito(60);
+            sesionDefault.setD_ejercicio(30);
+            sesionDefault.setNum_circuitos(3);
+            sesionDefault.setNum_ejercicios(5);
+            sesionDefault.setT_ejercicio(60);
+            sesionDefault.setT_calentamiento(300);
+            
+            singleton.getGym().getTiposSesion().add(sesionDefault);
+            singleton.salvar();
+        }
+        
+        
+        
+        
         arrayListSessions = singleton.getGym().getTiposSesion();
         obsListSessions = FXCollections.observableArrayList(arrayListSessions);
         groupData = singleton.getGym().getGrupos();    
         groupObsList = FXCollections.observableArrayList(groupData);
+        
+        
+        
     }   
     
     
