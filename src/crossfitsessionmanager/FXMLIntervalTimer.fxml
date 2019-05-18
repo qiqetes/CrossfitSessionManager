@@ -24,7 +24,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" text="ALMOST THERE!" textAlignment="CENTER" wrappingWidth="607.0042304992676" GridPane.halignment="CENTER" />
+                  <Text fx:id="lDisplayedMsg" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" text="ALMOST THERE!" textAlignment="CENTER" wrappingWidth="607.0042304992676" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
             <GridPane prefHeight="680.0" prefWidth="2138.0">
@@ -37,7 +37,7 @@
                <children>
                   <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" styleClass="round-box" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="timer-text" text="44">
+                        <Text fx:id="lTime" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="timer-text" text="44">
                            <StackPane.margin>
                               <Insets />
                            </StackPane.margin>
@@ -77,7 +77,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="play-button" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#onClickPlay" prefHeight="100.0" prefWidth="100.0" styleClass="play-button" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="53.0" fitWidth="49.0" onDragDetected="#onClickPlay" pickOnBounds="true" preserveRatio="true">
                                  <image>
