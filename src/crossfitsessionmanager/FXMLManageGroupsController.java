@@ -114,9 +114,9 @@ public class FXMLManageGroupsController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAddModifyGroup.fxml"));
             AnchorPane root = (AnchorPane) loader.load();
             Stage stage = new Stage();
-            FXMLAddModifyGroupController AddModifyGroupController = loader.<FXMLAddModifyGroupController>getController();
+            FXMLAddModifyGroupController addModifyGroupController = loader.<FXMLAddModifyGroupController>getController();
             Grupo g = tableView.getSelectionModel().getSelectedItem();
-            AddModifyGroupController.initStage(stage, singleton, g, tableView);
+            addModifyGroupController.initStage(stage, singleton, g, tableView);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Modify Group");
@@ -128,6 +128,20 @@ public class FXMLManageGroupsController implements Initializable {
 
     @FXML
     private void onClickShowStats(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLGroupStats.fxml"));
+            AnchorPane root = (AnchorPane) loader.load();
+            Stage stage = new Stage();
+            FXMLGroupStatsController groupStatsController = loader.<FXMLGroupStatsController>getController();
+            Grupo g = tableView.getSelectionModel().getSelectedItem();
+            groupStatsController.initStage(g,stage);
+            Scene scene = new Scene(root);  
+            stage.setScene(scene);
+            stage.setTitle("Group Stats");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }
+        catch(IOException ioe){}
     }    
     
     

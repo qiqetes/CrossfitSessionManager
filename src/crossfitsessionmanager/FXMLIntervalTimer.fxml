@@ -17,7 +17,7 @@
       <VBox alignment="CENTER" layoutX="412.0" layoutY="440.0" minHeight="0.0" prefHeight="1040.0" prefWidth="1488.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="20.0">
          <children>
             <Text fx:id="lTrainingMode" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-timer" text="WARMING TIME" textAlignment="CENTER" wrappingWidth="902.236328125" />
-            <Text fx:id="lDisplayedMsg" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" text="ALMOST THERE!" textAlignment="CENTER" wrappingWidth="607.0042304992676" />
+            <Text fx:id="lDisplayedMsg" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" textAlignment="CENTER" wrappingWidth="607.0042304992676" />
             <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="457.0" styleClass="round-box">
                <children>
                   <Text fx:id="lTime" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="timer-text" text="44">
@@ -47,7 +47,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#onClickPlay" prefHeight="100.0" prefWidth="100.0" styleClass="play-button">
                      <graphic>
-                        <ImageView fitHeight="100.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="playImgView" fitHeight="100.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/play-white.png" />
                            </image>

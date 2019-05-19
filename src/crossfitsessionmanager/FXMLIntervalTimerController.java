@@ -30,12 +30,16 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import modelo.Grupo;
+import modelo.Sesion;
 import modelo.SesionTipo;
+import modelo.util.DurationAdapter;
 
 /**
  * FXML Controller class
@@ -67,6 +71,16 @@ public class FXMLIntervalTimerController implements Initializable {
 
     private int counter = 0;
     private Training[] trainings;
+    
+    boolean firstStarted = false;
+    boolean isFinished = false;
+    long sessionStartTime;
+    long sessionFinishTime;
+    Image playImg = new Image(getClass().getResource("/resources/play-white.png").toString() );
+    Image pauseImg = new Image(getClass().getResource("/resources/pause.png").toString() );
+    @FXML
+    private ImageView playImgView;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -109,7 +123,15 @@ public class FXMLIntervalTimerController implements Initializable {
         lTime.textProperty().bind(task.messageProperty());
         progressIndicator.progressProperty().bind(task.progressProperty());
         progressIndicator.progressProperty().addListener((obs, oldVal, newVal) -> {
-
+            if(newVal.floatValue() > 0.5 && lTrainingMode.getText().equals("EXERCISE TIME!")){
+                lDisplayedMsg.setText("Give all your STRENGTH!");
+            }else if(newVal.floatValue() < 0.5 && newVal.floatValue() >0.4){
+                lDisplayedMsg.setText("Just halfway to go");
+            }else if(newVal.floatValue()< 0.1){
+                lDisplayedMsg.setText("Almost there!");
+            }else{
+                lDisplayedMsg.setText("");
+            }
             if (newVal.floatValue() == 0) {
                 System.out.println(counter);
                 // Unbind
@@ -132,6 +154,8 @@ public class FXMLIntervalTimerController implements Initializable {
                     lTime.textProperty().unbind();
                     lTime.setText("0:00");
                     lTrainingMode.setText("SESSION FINISHED!!!");
+                    saveSession();
+                    
                 }
             }
 
@@ -143,6 +167,26 @@ public class FXMLIntervalTimerController implements Initializable {
             }
         });
     }
+    
+    void saveSession(){
+        task.cancel();
+        isFinished = true;
+        sessionFinishTime = System.currentTimeMillis();
+        
+        try{
+            Sesion sesion = new Sesion();
+            int dur = (int)(sessionFinishTime - sessionStartTime)/1000;
+            String d = Utils.toMinSecFormat(dur);
+            DurationAdapter dA = new DurationAdapter();        
+            Duration duration = dA.unmarshal(d);
+            sesion.setDuracion(duration);
+            sesion.setFecha(LocalDateTime.now());
+            sesion.setTipo(template);
+            group.setDefaultTipoSesion(template);        
+            group.getSesiones().add(sesion);
+        }catch(Exception e){}               
+        
+    }
 
     void fillTrainings() {
         int isWarming = warmT > 0 ? 1 : 0;
@@ -151,7 +195,7 @@ public class FXMLIntervalTimerController implements Initializable {
         AudioClip effect;
         
         if (isWarming == 1) {
-            effect = new AudioClip(getClass().getResource("/resources/bell.mp3").toString());
+            effect = new AudioClip(getClass().getResource("/resources/321.mp3").toString());
             trainings[0] = new Training(warmT, "WARMING TIME", effect);
             count = 1;
         }
@@ -206,42 +250,78 @@ public class FXMLIntervalTimerController implements Initializable {
         if (isPaused) {
             task.play();
             isPaused = false;
+            playImgView.setImage(pauseImg);
         } else {
             isPaused = true;
             task.pause();
+            playImgView.setImage(playImg);
+        }
+        
+        if(firstStarted == false){
+            sessionStartTime = System.currentTimeMillis();
+            firstStarted = true;
         }
     }
 
     @FXML
     private void onClickSkip(ActionEvent event) {
+        counter++;
+        task.cancel();
+        lTime.textProperty().unbind();
+        progressIndicator.progressProperty().unbind();
+
+
+        if (counter < trainings.length) {
+            task = new MyCronoTask();
+            task.setTimeCrono(trainings[counter].seg);
+            hilo = new Thread(task);
+            hilo.setDaemon(true);
+            hilo.start();
+            lTrainingMode.setText(trainings[counter].modo);
+            lTime.textProperty().bind(task.messageProperty());
+            progressIndicator.progressProperty().bind(task.progressProperty());
+            task.play();
+        } else {
+
+            lTime.textProperty().unbind();
+            lTime.setText("0:00");
+            lTrainingMode.setText("SESSION FINISHED!!!");
+        }
     }
 
     @FXML
     private void onClickReset(ActionEvent event) {
         System.out.println("Reseting");
 
+        counter = 0;
+        task.cancel();
         lTime.textProperty().unbind();
         progressIndicator.progressProperty().unbind();
-        progressIndicator.setRotate(0);
-        isPaused = true;
 
+
+       
         task = new MyCronoTask();
+        task.setTimeCrono(trainings[counter].seg);
         hilo = new Thread(task);
         hilo.setDaemon(true);
         hilo.start();
+        lTrainingMode.setText(trainings[counter].modo);
         lTime.textProperty().bind(task.messageProperty());
         progressIndicator.progressProperty().bind(task.progressProperty());
+        
+        
+        isPaused = false;
+        playImgView.setImage(playImg);
     }
 
     @FXML
     private void onClickQuit(ActionEvent event) {
+        
+        saveSession();
         primaryStage.close();
         // Todo: save the session on group
     }
 
-    private void setTimes() {
-
-    }
 
     class MyCronoTask extends Task<Void> {
 

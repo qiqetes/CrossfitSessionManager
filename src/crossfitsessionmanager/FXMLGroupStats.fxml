@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@MyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLGroupStatsController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Pane prefHeight="60.0" prefWidth="760.0" styleClass="card">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+               <children>
+                  <Text fx:id="lGroupCode" layoutX="33.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="GroupName" wrappingWidth="236.6708984375" />
+               </children>
+            </Pane>
+            <HBox prefHeight="100.0" prefWidth="760.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="560.0" prefWidth="615.0" styleClass="card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Stats" />
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="-30.0" right="-30.0" top="10.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <LineChart fx:id="lineChart" prefHeight="400.0" prefWidth="492.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="560.0" prefWidth="331.0" styleClass="card">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Details" />
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="-30.0" right="-30.0" top="10.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Description:" />
+                        <Text fx:id="lGroupDescription" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="details-text" text="Text" />
+                        <Text layoutX="40.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Default Session:">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="lDefSessionCode" layoutX="40.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="details-text" text="Text" />
+                        <Text layoutX="40.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Last Session duration:">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="lLastSessionDur" layoutX="40.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="details-text" text="Text" />
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
