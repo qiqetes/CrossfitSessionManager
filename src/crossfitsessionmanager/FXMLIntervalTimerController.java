@@ -141,11 +141,6 @@ public class FXMLIntervalTimerController implements Initializable {
             this.warmT = WarmT; this.exerT = ExerT; this.exerRest = ExerRest; this.exerN = ExerN; this.circN = CircN; this.circRest = CircRest;
         }
         
-        MyData countDown(int seconds) {
-            secActual = seconds - (System.currentTimeMillis() - startTime)/1000;
-            if(secActual <= 0) finished = true;
-            return new MyData(Utils.toMinSecFormat((int)secActual), "Warming Time" );
-        }
         long calcula(){
             secActual = secTotal - (System.currentTimeMillis() - startTime)/1000;
             updateMessage(Utils.toMinSecFormat((int)secActual));
