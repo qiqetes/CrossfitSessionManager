@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.ProgressIndicator?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
@@ -16,13 +17,18 @@
          <children>
             <Text fx:id="lTrainingMode" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-timer" text="WARMING TIME" textAlignment="CENTER" wrappingWidth="902.236328125" />
             <Text fx:id="lDisplayedMsg" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="support-message" text="ALMOST THERE!" textAlignment="CENTER" wrappingWidth="607.0042304992676" />
-            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="504.0" styleClass="round-box">
+            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="457.0" styleClass="round-box">
                <children>
                   <Text fx:id="lTime" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="timer-text" text="44">
                      <StackPane.margin>
                         <Insets />
                      </StackPane.margin>
                   </Text>
+                  <ProgressIndicator fx:id="progressIndicator" prefHeight="279.0" prefWidth="488.0" progress="0.0" radius="240.0">
+                     <StackPane.margin>
+                        <Insets top="1.0" />
+                     </StackPane.margin>
+                  </ProgressIndicator>
                </children>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -60,7 +66,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutX="109.0" layoutY="462.0" prefHeight="179.0" prefWidth="396.0" styleClass="card">
+      <VBox alignment="CENTER" layoutX="105.0" layoutY="361.0" prefHeight="179.0" prefWidth="396.0" styleClass="card" AnchorPane.topAnchor="361.0">
          <children>
             <Text fx:id="lGroup" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Grupo de tardes" textAlignment="CENTER" wrappingWidth="289.92966651916504" />
             <Text fx:id="lSesionTipo" layoutX="59.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Sesion canyera" textAlignment="CENTER" wrappingWidth="289.92966651916504">

@@ -5,6 +5,7 @@
  */
 package crossfitsessionmanager;
 
+import com.gluonhq.charm.glisten.control.ProgressIndicator;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -52,6 +53,8 @@ public class FXMLIntervalTimerController implements Initializable {
     private SesionTipo template;
     private Grupo group;
     private MyCronoTask task;
+    @FXML
+    private ProgressIndicator progressIndicator;
     
         
     @Override
@@ -91,14 +94,24 @@ public class FXMLIntervalTimerController implements Initializable {
     @FXML
     private void onClickQuit(ActionEvent event) {
     }
-
-    class MyCronoTask extends Task<Void>{
+    class MyData{
+        StringProperty trainingMode = new SimpleStringProperty();
+        StringProperty timerString = new SimpleStringProperty();
+        
+        public MyData(String timerString,String trainingMode) {
+            this.trainingMode.setValue(trainingMode);
+            this.timerString.setValue(timerString);
+        }
+    }
+    
+    class MyCronoTask extends Task<MyData>{
         boolean started = false;
         long secTotal;
         long secActual;
         long startTime;
         
-        int WarmT, ExerT, ExerRest, ExerN, CircN, CircRest;
+        boolean finished = false;        
+        int warmT, exerT, exerRest, exerN, circN, circRest;
         
         void startTimer(){
             started = true;
@@ -112,17 +125,22 @@ public class FXMLIntervalTimerController implements Initializable {
         }
         
         void initTimeVariables(int WarmT, int ExerT, int ExerRest, int ExerN, int CircN,int CircRest){
-            this.WarmT = WarmT; this.ExerT = ExerT; this.ExerRest = ExerRest; this.ExerN = ExerN; this.CircN = CircN; this.CircRest = CircRest;
+            this.warmT = WarmT; this.exerT = ExerT; this.exerRest = ExerRest; this.exerN = ExerN; this.circN = CircN; this.circRest = CircRest;
         }
         
-        long calcula() {
+        MyData countDown(int seconds) {
+            secActual = seconds - (System.currentTimeMillis() - startTime)/1000;
+            if(secActual <= 0) finished = true;
+            return new MyData(Utils.toMinSecFormat((int)secActual), "Warming Time" );
+        }
+        long calcula(){
             secActual = secTotal - (System.currentTimeMillis() - startTime)/1000;
-            updateMessage("" + secActual);
+            updateMessage(Utils.toMinSecFormat((int)secActual));
             return secActual;
         }
         
         @Override
-        protected Void call() {            
+        protected MyData call() {            
             while (true) {
                 try {
                     Thread.sleep(1000);
@@ -138,23 +156,23 @@ public class FXMLIntervalTimerController implements Initializable {
                 
                 while(started){
                     /*If there is warming time*/
-                    if(WarmT > -1){
-                        setTimeCrono(WarmT);
+                    if(warmT > -1){
+                        setTimeCrono(warmT);
                         next = secTotal;
                         while(started && next != 0){
                             next = calcula();
                         }
                     }
 
-                    for(int i = CircN; i > 0; i--){ //Repeats the circuit
-                        for(int j = ExerN; j > 0; j--){ //Number of exercises
-                            setTimeCrono(ExerT);
+                    for(int i = circN; i > 0; i--){ //Repeats the circuit
+                        for(int j = exerN; j > 0; j--){ //Number of exercises
+                            setTimeCrono(exerT);
                             next = secTotal;
                             while(started && next != -1){
                                 next = calcula();
                             }
                             if(j>1){    //Last time there is no resting time for exercises, but for circuit
-                                setTimeCrono(ExerRest);
+                                setTimeCrono(exerRest);
                                 next = secTotal;
                                 while(started && next != -1){
                                     next = calcula();
@@ -162,7 +180,7 @@ public class FXMLIntervalTimerController implements Initializable {
                             }                  
                         }
                         if(i>1){    //Last time there is nor resting time for circuit neither exercise
-                            setTimeCrono(CircRest);
+                            setTimeCrono(circRest);
                             next = secTotal;
                             while(started && next != -1){
                                 next = calcula();
