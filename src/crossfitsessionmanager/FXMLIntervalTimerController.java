@@ -24,7 +24,9 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
@@ -53,68 +55,161 @@ public class FXMLIntervalTimerController implements Initializable {
     private Text lSesionTipo;
     @FXML
     private ProgressIndicator progressIndicator;
-    
+
     private Stage primaryStage;
     private SesionTipo template;
     private Grupo group;
     private MyCronoTask task;
     private Thread hilo;
-    private boolean isPaused = false;
+    private boolean isPaused = true;
     private int warmT, exerT, exerRest, exerN, circN, circRest;
-    
-    
-        
+
+    private int counter = 0;
+    private Training[] trainings;
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {     
-        
-    }    
-    
+    public void initialize(URL url, ResourceBundle rb) {
+
+    }
+
     public void initStage(SesionTipo sT, Grupo g, Stage stage) {
         template = sT;
         group = g;
         primaryStage = stage;
-        
         primaryStage.initStyle(StageStyle.UNDECORATED);
-        
+
         /*Set Text to labels*/
         lGroup.setText(group.getCodigo());
         lSesionTipo.setText(template.getCodigo());
-        
+
         /*Initialize global variables to pass to the task*/
-        warmT = template.getT_calentamiento(); 
+        warmT = template.getT_calentamiento();
         exerT = template.getT_ejercicio();
         exerRest = template.getD_ejercicio();
         exerN = template.getNum_ejercicios();
         circN = template.getNum_circuitos();
-        circRest = template.getD_circuito();    
-        
+        circRest = template.getD_circuito();
+
+        fillTrainings();
+
         task = new MyCronoTask();
-        task.initTimeVariables(warmT,exerT,exerRest,exerN,circN,circRest);
+        task.setTimeCrono(trainings[counter].seg);
+        lTrainingMode.setText(trainings[counter].modo);
         hilo = new Thread(task);
         hilo.setDaemon(true);
         hilo.start();
-        
         /*Bingdings*/
+
+        bindings();
+
+    }
+
+    void bindings() {
         lTime.textProperty().bind(task.messageProperty());
         progressIndicator.progressProperty().bind(task.progressProperty());
+
+        // Task
+//        task.setOnSucceeded(new EventHandler<WorkerStateEvent>(){
+//            @Override
+//            public void handle(WorkerStateEvent e){
+//                System.out.println("Finished");
+//                // Unbind
+//                lTime.textProperty().unbind();
+//                progressIndicator.progressProperty().unbind();
+//                
+//                counter++;
+//                task = new MyCronoTask();
+//                task.setTimeCrono(trainings[counter].seg);
+//                hilo = new Thread(task);
+//                hilo.setDaemon(true);
+//                hilo.start(); 
+//                lTrainingMode.setText(trainings[counter].modo);
+//                lTime.textProperty().bind(task.messageProperty());
+//                progressIndicator.progressProperty().bind(task.progressProperty());
+//            }
+//        });
+//        
+        progressIndicator.progressProperty().addListener((obs, oldVal, newVal) -> {
+
+            if (newVal.floatValue() == 0) {
+                System.out.println(counter);
+                // Unbind
+                lTime.textProperty().unbind();
+                progressIndicator.progressProperty().unbind();
+
+                counter++;
+                if (counter < trainings.length) {
+                    task = new MyCronoTask();
+                    task.setTimeCrono(trainings[counter].seg);
+                    hilo = new Thread(task);
+                    hilo.setDaemon(true);
+                    hilo.start();
+                    lTrainingMode.setText(trainings[counter].modo);
+                    lTime.textProperty().bind(task.messageProperty());
+                    progressIndicator.progressProperty().bind(task.progressProperty());
+                    task.play();
+                } else {
+
+                    lTime.textProperty().unbind();
+                    lTime.setText("0:00");
+                    lTrainingMode.setText("SESSION FINISHED!!!");
+                }
+            }
+
+        });
+    }
+
+    void fillTrainings() {
+        int isWarming = warmT > 0 ? 1 : 0;
+        trainings = new Training[circN * (exerN * 2 - 1) + isWarming + circN - 1];
+        int count = 0;
+
+        if (isWarming == 1) {
+            trainings[0] = new Training(warmT, "WARMING TIME");
+            count = 1;
+        }
+        for (int k = 0; k < circN; k++) {
+            for (int l = 0; l < exerN; l++) {
+                trainings[count] = new Training(exerT, "EXERCISE TIME!");
+                if (l != exerN - 1) {
+                    trainings[count + 1] = new Training(exerRest, "REST TIME");
+                    count += 2;
+                } else {
+                    count++;
+                }
+            }
+            if (k != circN - 1) {
+                trainings[count] = new Training(circRest, "CIRCUIT REST");
+                count++;
+            }
+        }
+        for (int i = 0; i < trainings.length; i++) {
+            System.out.println(trainings[i].modo);
+        }
+    }
+
+    class Training {
+
+        int seg;
+        String modo;
+
+        public Training(int s, String m) {
+            seg = s;
+            modo = m;
+        }
     }
 
     @FXML
     private void onClickPlay(ActionEvent event) {
-        if(isPaused){
-            isPaused = false;
-            task.startTimer();
-        }else{
-            isPaused = true;
-            task.stopTimer();
-        }
-         /*Create task*/
-        
-      
-        
-        
-    }
 
+        if (isPaused) {
+            task.play();
+            isPaused = false;
+        } else {
+            isPaused = true;
+            task.pause();
+        }
+    }
 
     @FXML
     private void onClickSkip(ActionEvent event) {
@@ -123,115 +218,78 @@ public class FXMLIntervalTimerController implements Initializable {
     @FXML
     private void onClickReset(ActionEvent event) {
         System.out.println("Reseting");
-        task.stopTimer();
+
+        lTime.textProperty().unbind();
+        progressIndicator.progressProperty().unbind();
+        progressIndicator.setRotate(0);
+        isPaused = true;
+
         task = new MyCronoTask();
-        task.initTimeVariables(warmT,exerT,exerRest,exerN,circN,circRest);
         hilo = new Thread(task);
         hilo.setDaemon(true);
-        hilo.start();        
+        hilo.start();
+        lTime.textProperty().bind(task.messageProperty());
+        progressIndicator.progressProperty().bind(task.progressProperty());
     }
 
     @FXML
     private void onClickQuit(ActionEvent event) {
         primaryStage.close();
+        // Todo: save the session on group
     }
-    
-    
-    
-    
 
-    class MyCronoTask extends Task<Void>{
+    private void setTimes() {
+
+    }
+
+    class MyCronoTask extends Task<Void> {
+
         boolean started = false;
         long secTotal;
         long secActual;
         long startTime;
-        
-        boolean finished = false;        
-        int warmT, exerT, exerRest, exerN, circN, circRest;
-        
-        void startTimer(){
-            started = true;
-            startTime = System.currentTimeMillis();
-        }
-        void stopTimer(){
-            started = false;
-        }
-        
-        void setTimeCrono(int sec){
+        long timePaused = 0;
+
+        boolean paused = true;
+
+        void setTimeCrono(int sec) {
             secTotal = sec;
             secActual = secTotal;
             startTime = System.currentTimeMillis();
         }
-        
-        void initTimeVariables(int WarmT, int ExerT, int ExerRest, int ExerN, int CircN,int CircRest){
-            this.warmT = WarmT; this.exerT = ExerT; this.exerRest = ExerRest; this.exerN = ExerN; this.circN = CircN; this.circRest = CircRest;
+
+        void pause() {
+            paused = true;
         }
-        
-        long calcula(){
-            secActual = secTotal - (System.currentTimeMillis() - startTime)/1000;
-            updateMessage(Utils.toMinSecFormat((int)secActual));
+
+        void play() {
+            paused = false;
+        }
+
+        long calcula() {
+            secActual = secTotal + timePaused - (System.currentTimeMillis() - startTime) / 1000;
+            updateMessage(Utils.toMinSecFormat((int) secActual));
             updateProgress(secActual, secTotal);
             return secActual;
         }
-        
+
         @Override
-        protected Void call() {            
+        protected Void call() throws Exception {
             while (true) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    if (isCancelled()) {
-                        break;
-                    }
-                }
+                Thread.sleep(100);
                 if (isCancelled()) {
                     break;
                 }
-                long next;
-                
-                while(started){
-                    /*If there is warming time*/
-                    if(warmT > -1){
-                        setTimeCrono(warmT);
-                        next = secTotal;
-                        while(started && next != 0){
-                            next = calcula();
-                        }
-                    }
-
-                    for(int i = circN; i > 0; i--){ //Repeats the circuit
-                        for(int j = exerN; j > 0; j--){ //Number of exercises
-                            setTimeCrono(exerT);
-                            next = secTotal;
-                            while(started && next != -1){
-                                next = calcula();
-                            }
-                            if(j>1){    //Last time there is no resting time for exercises, but for circuit
-                                setTimeCrono(exerRest);
-                                next = secTotal;
-                                while(started && next != -1){
-                                    next = calcula();
-                                } 
-                            }                  
-                        }
-                        if(i>1){    //Last time there is nor resting time for circuit neither exercise
-                            setTimeCrono(circRest);
-                            next = secTotal;
-                            while(started && next != -1){
-                                next = calcula();
-                            }
-                        }else{
-                            System.err.println("Cancelling");
-                            updateMessage("0");
-                            started = false;
-                            cancel();
-                        }
-                    }   
+                while (paused) {
+                    Thread.sleep(1000);
+                    timePaused += 1;
                 }
+                if (calcula() < 0) {
+                    return null;
+                }
+
             }
             return null;
         }
-
     }
 }
-
