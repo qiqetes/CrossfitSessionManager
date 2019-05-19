@@ -18,6 +18,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import modelo.Grupo;
+import modelo.SesionTipo;
 
 /**
  * FXML Controller class
@@ -28,7 +29,7 @@ public class FXMLGroupStatsController implements Initializable {
     @FXML
     private Text lGroupCode;
     @FXML
-    private LineChart<Number, Number> lineChart;
+    private LineChart<String, Number> lineChart;
     @FXML
     private Text lGroupDescription;
     @FXML
@@ -38,6 +39,10 @@ public class FXMLGroupStatsController implements Initializable {
     
     private Grupo grupo;
     private Stage primaryStage;
+    @FXML
+    private NumberAxis yAxis;
+    @FXML
+    private CategoryAxis xAxis;
 
 
     @Override
@@ -53,21 +58,32 @@ public class FXMLGroupStatsController implements Initializable {
     
     private void initChart(){
         /*LineChart initialization*/
-        NumberAxis xAxis = new NumberAxis();
-        NumberAxis yAxis = new NumberAxis();        
+//        CategoryAxis xAxis = new CategoryAxis();
+//        NumberAxis yAxis = new NumberAxis();        
+
         xAxis.setLabel("Date");
         yAxis.setLabel("Minutes");
-        lineChart = new LineChart(xAxis,yAxis);
         
         /*Initialize series and show just the last 10 sessions (in case the group has done more than 10)*/
         int i = (grupo.getSesiones().size() > 10) ? (grupo.getSesiones().size()-10) : 0;
+        XYChart.Series seriesTime = new XYChart.Series();
+        seriesTime.setName("RealTime");
+        XYChart.Series seriesRest = new XYChart.Series();
+        seriesRest.setName("SessionRestTime");
+        XYChart.Series seriesFanTime = new XYChart.Series();
+        seriesFanTime.setName("SessionTime");
         for(; i < grupo.getSesiones().size(); i++){
             Duration duration = grupo.getSesiones().get(i).getDuracion();
             LocalDateTime date = grupo.getSesiones().get(i).getFecha();
-            XYChart.Series series = new XYChart.Series();
-            series.getData().add(new XYChart.Data(duration, date));
             
-            lineChart.getData().add(series);
+//            series.setName(grupo.getSesiones().get(i).getTipo().getCodigo());
+            seriesTime.getData().add(new XYChart.Data( date.toString(),duration.getSeconds()/60)); 
+            SesionTipo t = grupo.getSesiones().get(i).getTipo();
+            int workinTime = t.getNum_ejercicios()*t.getT_ejercicio() + t.getT_calentamiento();
+            int restinTime = (t.getNum_ejercicios() - 1)* t.getD_ejercicio() + (t.getNum_circuitos()-1)*t.getD_circuito();
+            seriesRest.getData().add(new XYChart.Data( date.toString(), restinTime/60)); 
+            seriesFanTime.getData().add(new XYChart.Data( date.toString(),workinTime/60)); 
         }
+         lineChart.getData().addAll(seriesTime,seriesFanTime,seriesRest);
     }
 }

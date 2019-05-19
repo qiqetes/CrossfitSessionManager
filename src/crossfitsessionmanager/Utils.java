@@ -64,4 +64,10 @@ public class Utils {
         int sec = seconds % 60;
         return String.format("%d:%02d", min, sec);
     }
+    public static String toMinSecFormat2(int seconds){
+        int min = seconds / 60;
+        int sec = seconds % 60;
+        return String.format("%02d:%02d", min, sec);
+    }
+    
 }

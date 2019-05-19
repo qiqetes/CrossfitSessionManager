@@ -175,16 +175,16 @@ public class FXMLIntervalTimerController implements Initializable {
         
         try{
             Sesion sesion = new Sesion();
-            int dur = (int)(sessionFinishTime - sessionStartTime)/1000;
-            String d = Utils.toMinSecFormat(dur);
-            DurationAdapter dA = new DurationAdapter();        
-            Duration duration = dA.unmarshal(d);
+            long dur = (sessionFinishTime - sessionStartTime);
+            Duration duration = Duration.ofMillis(dur);
             sesion.setDuracion(duration);
             sesion.setFecha(LocalDateTime.now());
             sesion.setTipo(template);
             group.setDefaultTipoSesion(template);        
             group.getSesiones().add(sesion);
-        }catch(Exception e){}               
+        }catch(Exception e){
+            System.err.println("Sesion no guardada");
+        }               
         
     }
 
