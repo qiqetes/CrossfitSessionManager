@@ -53,6 +53,7 @@ public class FXMLIntervalTimerController implements Initializable {
     private SesionTipo template;
     private Grupo group;
     private MyCronoTask task;
+    private boolean isPaused = false;
     @FXML
     private ProgressIndicator progressIndicator;
     
@@ -61,13 +62,14 @@ public class FXMLIntervalTimerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {       
         
         task = new MyCronoTask();      
-        task.initTimeVariables(0,3,2,3,2,5);
+        task.initTimeVariables(120,3,2,3,2,5);
         //template.getT_calentamiento(), template.getT_ejercicio(), template.getD_ejercicio(),template.getNum_ejercicios(),template.getNum_circuitos(),template.getD_circuito());
         Thread hilo = new Thread(task);
         hilo.setDaemon(true);
         hilo.start();
         
         lTime.textProperty().bind(task.messageProperty());
+        progressIndicator.progressProperty().bind(task.progressProperty());
     }    
     
     public void initStage(SesionTipo sT, Grupo g) {
@@ -75,11 +77,19 @@ public class FXMLIntervalTimerController implements Initializable {
         group = g;
         lGroup.setText(group.getCodigo());
         lSesionTipo.setText(template.getCodigo());
+        
     }
 
     @FXML
     private void onClickPlay(ActionEvent event) {
-        task.startTimer();
+        if(isPaused){
+            isPaused = false;
+            task.startTimer();
+        }else{
+            isPaused = true;
+            task.stopTimer();
+        }
+        
     }
 
 
@@ -117,6 +127,9 @@ public class FXMLIntervalTimerController implements Initializable {
             started = true;
             startTime = System.currentTimeMillis();
         }
+        void stopTimer(){
+            started = false;
+        }
         
         void setTimeCrono(int sec){
             secTotal = sec;
@@ -136,6 +149,7 @@ public class FXMLIntervalTimerController implements Initializable {
         long calcula(){
             secActual = secTotal - (System.currentTimeMillis() - startTime)/1000;
             updateMessage(Utils.toMinSecFormat((int)secActual));
+            updateProgress(secActual, secTotal);
             return secActual;
         }
         
