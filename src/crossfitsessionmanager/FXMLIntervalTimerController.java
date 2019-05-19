@@ -9,37 +9,19 @@ import com.gluonhq.charm.glisten.control.ProgressIndicator;
 import javafx.scene.media.AudioClip;
 import java.net.URL;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Date;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableBooleanValue;
-import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import modelo.Grupo;
 import modelo.Sesion;
 import modelo.SesionTipo;
-import modelo.util.DurationAdapter;
 
 /**
  * FXML Controller class
@@ -60,6 +42,8 @@ public class FXMLIntervalTimerController implements Initializable {
     private Text lSesionTipo;
     @FXML
     private ProgressIndicator progressIndicator;
+    @FXML
+    private ImageView playImgView;
 
     private Stage primaryStage;
     private SesionTipo template;
@@ -78,8 +62,7 @@ public class FXMLIntervalTimerController implements Initializable {
     long sessionFinishTime;
     Image playImg = new Image(getClass().getResource("/resources/play-white.png").toString() );
     Image pauseImg = new Image(getClass().getResource("/resources/pause.png").toString() );
-    @FXML
-    private ImageView playImgView;
+    
 
 
     @Override
@@ -91,8 +74,11 @@ public class FXMLIntervalTimerController implements Initializable {
         template = sT;
         group = g;
         primaryStage = stage;
-        primaryStage.initStyle(StageStyle.UNDECORATED);
 
+        primaryStage.setOnCloseRequest((e)->{
+            onClickQuit(null);
+        });
+        
         /*Set Text to labels*/
         lGroup.setText(group.getCodigo());
         lSesionTipo.setText(template.getCodigo());
@@ -225,25 +211,6 @@ public class FXMLIntervalTimerController implements Initializable {
         }
     }
 
-    
-    
-    /*Training objects*/
-    class Training {
-
-        int seg;
-        String modo;
-        AudioClip efecto;
-
-        public Training(int s, String m, AudioClip e) {
-            seg = s;
-            modo = m;
-            efecto = e;
-        }
-    }
-
-    
-    
-    
     @FXML
     private void onClickPlay(ActionEvent event) {
 
@@ -291,15 +258,11 @@ public class FXMLIntervalTimerController implements Initializable {
 
     @FXML
     private void onClickReset(ActionEvent event) {
-        System.out.println("Reseting");
-
         counter = 0;
         task.cancel();
         lTime.textProperty().unbind();
         progressIndicator.progressProperty().unbind();
 
-
-       
         task = new MyCronoTask();
         task.setTimeCrono(trainings[counter].seg);
         hilo = new Thread(task);
@@ -309,20 +272,35 @@ public class FXMLIntervalTimerController implements Initializable {
         lTime.textProperty().bind(task.messageProperty());
         progressIndicator.progressProperty().bind(task.progressProperty());
         
-        
-        isPaused = false;
+        isPaused = true;
         playImgView.setImage(playImg);
     }
 
     @FXML
-    private void onClickQuit(ActionEvent event) {
-        
+    private void onClickQuit(ActionEvent event) {        
         saveSession();
         primaryStage.close();
         // Todo: save the session on group
     }
 
 
+    /*Training objects*/
+    class Training {
+
+        int seg;
+        String modo;
+        AudioClip efecto;
+
+        public Training(int s, String m, AudioClip e) {
+            seg = s;
+            modo = m;
+            efecto = e;
+        }
+    }
+    
+    
+    
+    /*Task objects*/
     class MyCronoTask extends Task<Void> {
 
         boolean started = false;

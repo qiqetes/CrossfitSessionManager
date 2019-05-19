@@ -5,18 +5,13 @@
  */
 package crossfitsessionmanager;
 
-import accesoBD.AccesoBD;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import modelo.SesionTipo;
 
 /**
@@ -42,6 +37,7 @@ public class FXMLSessionDetailsController implements Initializable {
     private Text lRestTimeCircuits;
     
     private SesionTipo template;
+    private Stage primaryStage;
     
     
     
@@ -60,7 +56,9 @@ public class FXMLSessionDetailsController implements Initializable {
     
     void initStage(SesionTipo sT, Stage stage) {
         template = sT;  
-        stage.initStyle(StageStyle.UNDECORATED);
+        primaryStage = stage;
+        primaryStage.setResizable(false);
+        
         lCode.setText(template.getCodigo());
         lWarmTime.setText(template.getT_calentamiento() + " seconds");
         lNofExer.setText(template.getNum_ejercicios() + " exercises" );

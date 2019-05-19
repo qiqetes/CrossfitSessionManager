@@ -20,7 +20,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import modelo.Grupo;
 import modelo.SesionTipo;
-import modelo.util.LocalDateTimeAdapter;
 
 /**
  * FXML Controller class

@@ -7,11 +7,8 @@ package crossfitsessionmanager;
 
 import accesoBD.AccesoBD;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +20,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import modelo.SesionTipo;
 
 /**
@@ -59,7 +55,6 @@ public class FXMLSessionTemplatesController implements Initializable {
     
     public static void initStage(Stage stage) {
         primaryStage = stage;
-        primaryStage.initStyle(StageStyle.UNDECORATED);
     }
 
     @FXML

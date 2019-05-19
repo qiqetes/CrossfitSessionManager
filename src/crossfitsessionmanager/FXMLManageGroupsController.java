@@ -8,18 +8,14 @@ package crossfitsessionmanager;
 import accesoBD.AccesoBD;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -28,7 +24,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import modelo.Grupo;
 import modelo.SesionTipo;
 
@@ -87,7 +82,6 @@ public class FXMLManageGroupsController implements Initializable {
     
     public void initStage(Stage stage) {
         primaryStage = stage;
-        primaryStage.initStyle(StageStyle.UNDECORATED);
     }
 
     @FXML
@@ -134,12 +128,16 @@ public class FXMLManageGroupsController implements Initializable {
             Stage stage = new Stage();
             FXMLGroupStatsController groupStatsController = loader.<FXMLGroupStatsController>getController();
             Grupo g = tableView.getSelectionModel().getSelectedItem();
-            groupStatsController.initStage(g,stage);
+            if(!g.getSesiones().isEmpty()){
+                groupStatsController.initStage(g,stage);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Group Stats");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
+            }else{
+                Utils.dialog(Alert.AlertType.INFORMATION, "Information", "There are no stats recorded for this group", null);    
+            }
         }
         catch(IOException ioe){}
     }    
