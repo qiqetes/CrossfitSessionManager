@@ -136,6 +136,12 @@ public class FXMLIntervalTimerController implements Initializable {
             }
 
         });
+        lTime.textProperty().addListener((obs,oldVal,newVal)->{
+            if(newVal.equals("0:01")){
+                System.out.println("Sound");
+                trainings[counter].efecto.play();
+            }
+        });
     }
 
     void fillTrainings() {
@@ -145,16 +151,16 @@ public class FXMLIntervalTimerController implements Initializable {
         AudioClip effect;
         
         if (isWarming == 1) {
-            effect = new AudioClip(getClass().getResource("../resources/bell.mp3").toString());
+            effect = new AudioClip(getClass().getResource("/resources/bell.mp3").toString());
             trainings[0] = new Training(warmT, "WARMING TIME", effect);
             count = 1;
         }
         for (int k = 0; k < circN; k++) {
             for (int l = 0; l < exerN; l++) {
-                effect = new AudioClip(getClass().getResource("../resources/bell.mp3").toString()    );
+                effect = new AudioClip(getClass().getResource("/resources/bell.mp3").toString()    );
                 trainings[count] = new Training(exerT, "EXERCISE TIME!", effect);
                 if (l != exerN - 1) {
-                    effect = new AudioClip(getClass().getResource("../resources/321.mp3").toString()    );
+                    effect = new AudioClip(getClass().getResource("/resources/321.mp3").toString()    );
                     trainings[count + 1] = new Training(exerRest, "REST TIME", effect);
                     count += 2;
                 } else {
@@ -162,12 +168,12 @@ public class FXMLIntervalTimerController implements Initializable {
                 }
             }
             if (k != circN - 1) {
-                effect = new AudioClip(getClass().getResource("../resources/321.mp3").toString()    );
+                effect = new AudioClip(getClass().getResource("/resources/321.mp3").toString()    );
                 trainings[count] = new Training(circRest, "CIRCUIT REST", effect);
                 count++;
             }else{ //If it is the last exercise time
-                effect = new AudioClip(getClass().getResource("../resources/whistle.mp3").toString()    );
-                trainings[count] = new Training(exerT, "EXERCISE TIME!", effect);
+                effect = new AudioClip(getClass().getResource("/resources/Whistle.mp3").toString()    );
+                trainings[count-1] = new Training(exerT, "EXERCISE TIME!", effect);
             }
         }
         for (int i = 0; i < trainings.length; i++) {
