@@ -8,6 +8,7 @@ package crossfitsessionmanager;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import modelo.Grupo;
 import modelo.SesionTipo;
+import modelo.util.LocalDateTimeAdapter;
 
 /**
  * FXML Controller class
@@ -53,10 +55,14 @@ public class FXMLGroupStatsController implements Initializable {
     void initStage(Grupo g, Stage s) {
         grupo = g;
         primaryStage = s;
-        initChart();        
+        initChart();      
+        lGroupCode.setText(g.getCodigo());
+        lGroupDescription.setText(g.getDescripcion());
+        lDefSessionCode.setText(g.getDefaultTipoSesion().getCodigo());
+        lLastSessionDur.setText(g.getSesiones().get(g.getSesiones().size()-1).getDuracion().toMinutes() + " min");
     }
     
-    private void initChart(){
+    private void initChart() {
         /*LineChart initialization*/
 //        CategoryAxis xAxis = new CategoryAxis();
 //        NumberAxis yAxis = new NumberAxis();        
@@ -77,12 +83,18 @@ public class FXMLGroupStatsController implements Initializable {
             LocalDateTime date = grupo.getSesiones().get(i).getFecha();
             
 //            series.setName(grupo.getSesiones().get(i).getTipo().getCodigo());
-            seriesTime.getData().add(new XYChart.Data( date.toString(),duration.getSeconds()/60)); 
+            
+            String str = date.toString();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String ldts = date.format(formatter); 
+            
+            
+            seriesTime.getData().add(new XYChart.Data( ldts,duration.getSeconds()/60)); 
             SesionTipo t = grupo.getSesiones().get(i).getTipo();
             int workinTime = t.getNum_ejercicios()*t.getT_ejercicio() + t.getT_calentamiento();
             int restinTime = (t.getNum_ejercicios() - 1)* t.getD_ejercicio() + (t.getNum_circuitos()-1)*t.getD_circuito();
-            seriesRest.getData().add(new XYChart.Data( date.toString(), restinTime/60)); 
-            seriesFanTime.getData().add(new XYChart.Data( date.toString(),workinTime/60)); 
+            seriesRest.getData().add(new XYChart.Data( ldts, restinTime/60)); 
+            seriesFanTime.getData().add(new XYChart.Data( ldts,workinTime/60)); 
         }
          lineChart.getData().addAll(seriesTime,seriesFanTime,seriesRest);
     }
