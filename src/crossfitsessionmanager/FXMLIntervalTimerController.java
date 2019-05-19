@@ -6,6 +6,7 @@
 package crossfitsessionmanager;
 
 import com.gluonhq.charm.glisten.control.ProgressIndicator;
+import javafx.scene.media.AudioClip;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -107,28 +108,6 @@ public class FXMLIntervalTimerController implements Initializable {
     void bindings() {
         lTime.textProperty().bind(task.messageProperty());
         progressIndicator.progressProperty().bind(task.progressProperty());
-
-        // Task
-//        task.setOnSucceeded(new EventHandler<WorkerStateEvent>(){
-//            @Override
-//            public void handle(WorkerStateEvent e){
-//                System.out.println("Finished");
-//                // Unbind
-//                lTime.textProperty().unbind();
-//                progressIndicator.progressProperty().unbind();
-//                
-//                counter++;
-//                task = new MyCronoTask();
-//                task.setTimeCrono(trainings[counter].seg);
-//                hilo = new Thread(task);
-//                hilo.setDaemon(true);
-//                hilo.start(); 
-//                lTrainingMode.setText(trainings[counter].modo);
-//                lTime.textProperty().bind(task.messageProperty());
-//                progressIndicator.progressProperty().bind(task.progressProperty());
-//            }
-//        });
-//        
         progressIndicator.progressProperty().addListener((obs, oldVal, newVal) -> {
 
             if (newVal.floatValue() == 0) {
@@ -163,24 +142,32 @@ public class FXMLIntervalTimerController implements Initializable {
         int isWarming = warmT > 0 ? 1 : 0;
         trainings = new Training[circN * (exerN * 2 - 1) + isWarming + circN - 1];
         int count = 0;
-
+        AudioClip effect;
+        
         if (isWarming == 1) {
-            trainings[0] = new Training(warmT, "WARMING TIME");
+            effect = new AudioClip(getClass().getResource("../resources/bell.mp3").toString());
+            trainings[0] = new Training(warmT, "WARMING TIME", effect);
             count = 1;
         }
         for (int k = 0; k < circN; k++) {
             for (int l = 0; l < exerN; l++) {
-                trainings[count] = new Training(exerT, "EXERCISE TIME!");
+                effect = new AudioClip(getClass().getResource("../resources/bell.mp3").toString()    );
+                trainings[count] = new Training(exerT, "EXERCISE TIME!", effect);
                 if (l != exerN - 1) {
-                    trainings[count + 1] = new Training(exerRest, "REST TIME");
+                    effect = new AudioClip(getClass().getResource("../resources/321.mp3").toString()    );
+                    trainings[count + 1] = new Training(exerRest, "REST TIME", effect);
                     count += 2;
                 } else {
                     count++;
                 }
             }
             if (k != circN - 1) {
-                trainings[count] = new Training(circRest, "CIRCUIT REST");
+                effect = new AudioClip(getClass().getResource("../resources/321.mp3").toString()    );
+                trainings[count] = new Training(circRest, "CIRCUIT REST", effect);
                 count++;
+            }else{ //If it is the last exercise time
+                effect = new AudioClip(getClass().getResource("../resources/whistle.mp3").toString()    );
+                trainings[count] = new Training(exerT, "EXERCISE TIME!", effect);
             }
         }
         for (int i = 0; i < trainings.length; i++) {
@@ -188,17 +175,25 @@ public class FXMLIntervalTimerController implements Initializable {
         }
     }
 
+    
+    
+    /*Training objects*/
     class Training {
 
         int seg;
         String modo;
+        AudioClip efecto;
 
-        public Training(int s, String m) {
+        public Training(int s, String m, AudioClip e) {
             seg = s;
             modo = m;
+            efecto = e;
         }
     }
 
+    
+    
+    
     @FXML
     private void onClickPlay(ActionEvent event) {
 
