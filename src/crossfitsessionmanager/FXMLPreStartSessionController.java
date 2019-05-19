@@ -100,7 +100,7 @@ public class FXMLPreStartSessionController implements Initializable {
             FXMLIntervalTimerController intervalTimer = loader.<FXMLIntervalTimerController>getController();
             SesionTipo sT = cbSessionTemplate.getValue();
             Grupo g = cbGroup.getValue();
-            intervalTimer.initStage(sT, g);
+            intervalTimer.initStage(sT, g, stage);
             Scene scene = new Scene(root);  
             stage.setScene(scene);
             stage.setTitle("Interval Timer");

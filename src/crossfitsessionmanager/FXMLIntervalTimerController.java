@@ -29,6 +29,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.Grupo;
 import modelo.SesionTipo;
 
@@ -49,35 +51,52 @@ public class FXMLIntervalTimerController implements Initializable {
     private Text lGroup;
     @FXML
     private Text lSesionTipo;
-    
-    private SesionTipo template;
-    private Grupo group;
-    private MyCronoTask task;
-    private boolean isPaused = false;
     @FXML
     private ProgressIndicator progressIndicator;
     
+    private Stage primaryStage;
+    private SesionTipo template;
+    private Grupo group;
+    private MyCronoTask task;
+    private Thread hilo;
+    private boolean isPaused = false;
+    private int warmT, exerT, exerRest, exerN, circN, circRest;
+    
+    
         
     @Override
-    public void initialize(URL url, ResourceBundle rb) {       
+    public void initialize(URL url, ResourceBundle rb) {     
         
-        task = new MyCronoTask();      
-        task.initTimeVariables(120,3,2,3,2,5);
-        //template.getT_calentamiento(), template.getT_ejercicio(), template.getD_ejercicio(),template.getNum_ejercicios(),template.getNum_circuitos(),template.getD_circuito());
-        Thread hilo = new Thread(task);
-        hilo.setDaemon(true);
-        hilo.start();
-        
-        lTime.textProperty().bind(task.messageProperty());
-        progressIndicator.progressProperty().bind(task.progressProperty());
     }    
     
-    public void initStage(SesionTipo sT, Grupo g) {
+    public void initStage(SesionTipo sT, Grupo g, Stage stage) {
         template = sT;
         group = g;
+        primaryStage = stage;
+        
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        
+        /*Set Text to labels*/
         lGroup.setText(group.getCodigo());
         lSesionTipo.setText(template.getCodigo());
         
+        /*Initialize global variables to pass to the task*/
+        warmT = template.getT_calentamiento(); 
+        exerT = template.getT_ejercicio();
+        exerRest = template.getD_ejercicio();
+        exerN = template.getNum_ejercicios();
+        circN = template.getNum_circuitos();
+        circRest = template.getD_circuito();    
+        
+        task = new MyCronoTask();
+        task.initTimeVariables(warmT,exerT,exerRest,exerN,circN,circRest);
+        hilo = new Thread(task);
+        hilo.setDaemon(true);
+        hilo.start();
+        
+        /*Bingdings*/
+        lTime.textProperty().bind(task.messageProperty());
+        progressIndicator.progressProperty().bind(task.progressProperty());
     }
 
     @FXML
@@ -89,6 +108,10 @@ public class FXMLIntervalTimerController implements Initializable {
             isPaused = true;
             task.stopTimer();
         }
+         /*Create task*/
+        
+      
+        
         
     }
 
@@ -99,22 +122,25 @@ public class FXMLIntervalTimerController implements Initializable {
 
     @FXML
     private void onClickReset(ActionEvent event) {
+        System.out.println("Reseting");
+        task.stopTimer();
+        task = new MyCronoTask();
+        task.initTimeVariables(warmT,exerT,exerRest,exerN,circN,circRest);
+        hilo = new Thread(task);
+        hilo.setDaemon(true);
+        hilo.start();        
     }
 
     @FXML
     private void onClickQuit(ActionEvent event) {
-    }
-    class MyData{
-        StringProperty trainingMode = new SimpleStringProperty();
-        StringProperty timerString = new SimpleStringProperty();
-        
-        public MyData(String timerString,String trainingMode) {
-            this.trainingMode.setValue(trainingMode);
-            this.timerString.setValue(timerString);
-        }
+        primaryStage.close();
     }
     
-    class MyCronoTask extends Task<MyData>{
+    
+    
+    
+
+    class MyCronoTask extends Task<Void>{
         boolean started = false;
         long secTotal;
         long secActual;
@@ -149,7 +175,7 @@ public class FXMLIntervalTimerController implements Initializable {
         }
         
         @Override
-        protected MyData call() {            
+        protected Void call() {            
             while (true) {
                 try {
                     Thread.sleep(1000);
@@ -205,6 +231,7 @@ public class FXMLIntervalTimerController implements Initializable {
             }
             return null;
         }
+
     }
 }
 
