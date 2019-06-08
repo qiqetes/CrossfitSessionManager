@@ -84,6 +84,9 @@ public class FXMLPreStartSessionController implements Initializable {
         cbGroup.valueProperty().addListener((observable, oldVal,newVal)->{
                 cbSessionTemplate.setValue(cbGroup.getValue().getDefaultTipoSesion());
         });
+        cbGroup.getEditor().textProperty().addListener((observable, oldVal,newVal)->{
+                System.out.println(newVal);
+        });
     }    
 
     @FXML
@@ -95,6 +98,8 @@ public class FXMLPreStartSessionController implements Initializable {
     private void onClickOk(ActionEvent event) {
         /*Open window*/
         try{
+            
+            // TODO: check if comboboxes have existing group and template.
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLIntervalTimer.fxml"));
             AnchorPane root = (AnchorPane) loader.load();
             Stage stage = new Stage();
