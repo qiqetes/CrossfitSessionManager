@@ -89,6 +89,7 @@ public class FXMLMainWindowController implements Initializable {
     
     public void initStage(Stage stage){
         primaryStage = stage;
+        primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest((e)->{
             onClickMenuBarClose(null);
         });
