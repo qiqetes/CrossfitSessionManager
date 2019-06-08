@@ -60,6 +60,9 @@ public class FXMLPreStartSessionController implements Initializable {
             }
         });   
         cbGroup.setVisibleRowCount(5); //Sets a scroll bar for the combobox if there are more than 5 items
+        cbGroup.focusedProperty().addListener((obs, oldVal, newVal)->{
+            cbGroup.show();
+        });
         
         cbSessionTemplate.setItems(FXMLMainWindowController.obsListSessions);
         cbSessionTemplate.setConverter(new StringConverter<SesionTipo>() {
