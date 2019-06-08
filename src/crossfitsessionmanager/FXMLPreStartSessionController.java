@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -85,7 +87,21 @@ public class FXMLPreStartSessionController implements Initializable {
                 cbSessionTemplate.setValue(cbGroup.getValue().getDefaultTipoSesion());
         });
         cbGroup.getEditor().textProperty().addListener((observable, oldVal,newVal)->{
-                System.out.println(newVal);
+            ArrayList<Grupo> grupos = singleton.getGym().getGrupos();
+            ObservableList<Grupo> gruposObs = FXCollections.observableArrayList(grupos);
+            ObservableList<Grupo> gruposObsRes = FXCollections.observableArrayList(grupos);
+            
+            for(int i = 0; i<gruposObs.size(); i++){
+                System.out.println(gruposObs.get(i).getCodigo() + ", " + newVal);
+                if(!gruposObs.get(i).getCodigo().startsWith(newVal)){
+                    gruposObsRes.remove(grupos.get(i));
+                }
+                else{
+                    gruposObsRes.remove(grupos.get(i));
+                }
+            }
+            
+            cbGroup.setItems(gruposObsRes);
         });
     }    
 
