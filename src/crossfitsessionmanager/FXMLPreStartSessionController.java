@@ -60,6 +60,7 @@ public class FXMLPreStartSessionController implements Initializable {
             }
         });   
         cbGroup.setVisibleRowCount(5); //Sets a scroll bar for the combobox if there are more than 5 items
+        /*Keeps the combo box unfold*/
         cbGroup.focusedProperty().addListener((obs, oldVal, newVal)->{
             cbGroup.show();
         });
@@ -79,6 +80,10 @@ public class FXMLPreStartSessionController implements Initializable {
             }
         });  
         cbSessionTemplate.setVisibleRowCount(5); //Sets a scroll bar for the combobox if there are more than 5 items
+        /*Keeps the combo box unfold*/
+        cbSessionTemplate.focusedProperty().addListener((obs, oldVal, newVal)->{
+            cbSessionTemplate.show();
+        });
                 
         /*Listener that synchronizes the correspondinf default template session when selecting a group*/
         cbGroup.valueProperty().addListener((observable, oldVal,newVal)->{
