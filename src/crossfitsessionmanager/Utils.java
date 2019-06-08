@@ -18,8 +18,6 @@ import modelo.SesionTipo;
 
 public class Utils {
     
-    
-    
     /*All types of dialogs*/
     public static void dialog(Alert.AlertType alertType, String title, String header, String content){
         Alert alert = new Alert(alertType);
@@ -69,5 +67,6 @@ public class Utils {
         int sec = seconds % 60;
         return String.format("%02d:%02d", min, sec);
     }
+    
     
 }

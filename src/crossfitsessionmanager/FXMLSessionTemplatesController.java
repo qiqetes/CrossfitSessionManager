@@ -20,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.SesionTipo;
 
 /**
@@ -51,10 +52,12 @@ public class FXMLSessionTemplatesController implements Initializable {
         
         /*Disable certain buttons if no item is selected from the tableView*/
             bSeeDetails.disableProperty().bind((Bindings.equal(-1, listViewSessions.getSelectionModel().selectedIndexProperty())));
+            
     }    
     
     public static void initStage(Stage stage) {
-        primaryStage = stage;
+        primaryStage = stage;        
+        primaryStage.initStyle(StageStyle.UNDECORATED);        
     }
 
     @FXML
@@ -91,6 +94,11 @@ public class FXMLSessionTemplatesController implements Initializable {
             stage.setTitle("Session Details");
             stage.show();
         }catch(Exception e){}
+    }
+
+    @FXML
+    private void onClickOk(ActionEvent event) {
+        primaryStage.close();
     }
     
     /* Format the text displayed on the listView cells */

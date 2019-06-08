@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.SesionTipo;
 
 /**
@@ -58,6 +59,7 @@ public class FXMLSessionDetailsController implements Initializable {
         template = sT;  
         primaryStage = stage;
         primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         
         lCode.setText(template.getCodigo());
         lWarmTime.setText(template.getT_calentamiento() + " seconds");

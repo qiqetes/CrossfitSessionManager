@@ -15,15 +15,18 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.Grupo;
 import modelo.Gym;
 import modelo.SesionTipo;
@@ -48,6 +51,8 @@ public class FXMLMainWindowController implements Initializable {
     private ArrayList<SesionTipo> arrayListSessions;
     public static ObservableList<Grupo> groupObsList;
     private ArrayList<Grupo> groupData = new ArrayList();
+    @FXML
+    private ImageView playImgView;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -84,6 +89,7 @@ public class FXMLMainWindowController implements Initializable {
     
     public void initStage(Stage stage){
         primaryStage = stage;
+        
         primaryStage.setOnCloseRequest((e)->{
             onClickMenuBarClose(null);
         });
@@ -230,4 +236,5 @@ public class FXMLMainWindowController implements Initializable {
             
         }
     }
+
 }

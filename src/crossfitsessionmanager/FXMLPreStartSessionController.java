@@ -8,6 +8,7 @@ package crossfitsessionmanager;
 import accesoBD.AccesoBD;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,43 +45,41 @@ public class FXMLPreStartSessionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         /*ComboBox initialization*/
-        cbSessionTemplate.setItems(FXMLMainWindowController.obsListSessions);
-        cbSessionTemplate.setConverter(new StringConverter<SesionTipo>() {
-
-            @Override
-            public String toString(SesionTipo template) {
-                return "Template: " + template.getCodigo();
-            }
-
-            @Override
-            public SesionTipo fromString(String string) {
-                throw new UnsupportedOperationException("DON'T USE ME!"); 
-            }
-        });     
-        
         cbGroup.setItems(FXMLMainWindowController.groupObsList);
         cbGroup.setConverter(new StringConverter<Grupo>() {
 
             @Override
             public String toString(Grupo group) {
-                return "Group: " + group.getCodigo();
+                if(group == null)return "";
+                return group.getCodigo();
             }
 
             @Override
             public Grupo fromString(String string) {
                 throw new UnsupportedOperationException("DON'T USE ME!"); 
             }
-        });     
+        });   
+        cbGroup.setVisibleRowCount(5); //Sets a scroll bar for the combobox if there are more than 5 items
         
-        /*Set a default group and session template for the comboBoxes when opening the window*/
-        if(FXMLMainWindowController.groupObsList.get(0) != null){
-            cbGroup.setValue(FXMLMainWindowController.groupObsList.get(0));
-            cbSessionTemplate.setValue(FXMLMainWindowController.groupObsList.get(0).getDefaultTipoSesion());
-        }
-        
+        cbSessionTemplate.setItems(FXMLMainWindowController.obsListSessions);
+        cbSessionTemplate.setConverter(new StringConverter<SesionTipo>() {
+
+            @Override
+            public String toString(SesionTipo template) {
+                if(template == null)return "";
+                return template.getCodigo();
+            }
+
+            @Override
+            public SesionTipo fromString(String string) {
+                throw new UnsupportedOperationException("DON'T USE ME!"); 
+            }
+        });  
+        cbSessionTemplate.setVisibleRowCount(5); //Sets a scroll bar for the combobox if there are more than 5 items
+                
         /*Listener that synchronizes the correspondinf default template session when selecting a group*/
         cbGroup.valueProperty().addListener((observable, oldVal,newVal)->{
-            cbSessionTemplate.setValue(cbGroup.getValue().getDefaultTipoSesion());
+                cbSessionTemplate.setValue(cbGroup.getValue().getDefaultTipoSesion());
         });
     }    
 
@@ -115,5 +114,7 @@ public class FXMLPreStartSessionController implements Initializable {
         primaryStage = stage;
         primaryStage.initStyle(StageStyle.UNDECORATED);
     }
+    
+    
     
 }

@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -39,14 +41,22 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Group" />
                   <Text layoutX="10.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="SessionTemplate" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="cbGroup" prefHeight="25.0" prefWidth="288.0" GridPane.columnIndex="1" />
-                  <ComboBox fx:id="cbSessionTemplate" prefHeight="25.0" prefWidth="482.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cbGroup" editable="true" prefHeight="25.0" prefWidth="288.0" promptText="🔍 Search Group" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="cbSessionTemplate" editable="true" prefHeight="25.0" prefWidth="482.0" promptText="🔍 Search Template" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <AnchorPane prefHeight="28.0" prefWidth="400.0">
                <children>
                   <Button layoutY="16.0" mnemonicParsing="false" onAction="#onClickCancel" styleClass="button-cancel" text="Cancel" AnchorPane.leftAnchor="0.0" />
-                  <Button layoutX="248.0" layoutY="16.0" mnemonicParsing="false" onAction="#onClickOk" styleClass="button-continue" text="Ok" AnchorPane.rightAnchor="0.0" />
+                  <Button layoutX="329.0" layoutY="8.0" mnemonicParsing="false" onAction="#onClickOk" styleClass="button-continue" text="Ok">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/ok-white.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets top="10.0" />

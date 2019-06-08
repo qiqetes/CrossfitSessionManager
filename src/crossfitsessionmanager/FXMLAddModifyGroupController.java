@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 import modelo.Grupo;
 import modelo.SesionTipo;
@@ -120,6 +121,7 @@ public class FXMLAddModifyGroupController implements Initializable {
     void initStage(Stage stage, AccesoBD singleton, Grupo grupo, TableView tbleView) {
         primaryStage = stage;
         primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         
         this.singleton = singleton;
         this.refTableView = tbleView;
