@@ -83,7 +83,7 @@ public class FXMLManageGroupsController implements Initializable {
     
     public void initStage(Stage stage) {
         primaryStage = stage;
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setResizable(true);
     }
 
     @FXML

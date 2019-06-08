@@ -16,7 +16,7 @@
    <children>
       <HBox fillHeight="false" prefHeight="792.0" prefWidth="986.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="690.0" styleClass="card">
+            <VBox prefHeight="750.0" prefWidth="690.0" styleClass="card">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Groups Manager" />
                   <Separator prefWidth="200.0">
@@ -36,14 +36,14 @@
                   <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
                </padding>
             </VBox>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+            <VBox prefHeight="750.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
                <children>
                   <AnchorPane prefHeight="237.0" prefWidth="333.0" styleClass="card">
                      <children>
-                        <VBox minWidth="200.0" prefHeight="282.0" prefWidth="315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="282.0" prefWidth="315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#onClickAddGroup" prefHeight="40.0" prefWidth="678.0" styleClass="logic-button" text="Add Group">
                                  <VBox.margin>
@@ -70,7 +70,7 @@
                   <AnchorPane prefHeight="434.0" prefWidth="286.0" />
                   <AnchorPane prefHeight="80.0" prefWidth="226.0" styleClass="card">
                      <children>
-                        <VBox layoutY="127.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="226.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox layoutY="127.0" prefHeight="80.0" prefWidth="226.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Button layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#onClickOk" prefHeight="40.0" prefWidth="678.0" styleClass="logic-button" text="  Ok">
                                  <VBox.margin>

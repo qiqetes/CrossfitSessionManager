@@ -56,8 +56,7 @@ public class FXMLSessionTemplatesController implements Initializable {
     }    
     
     public static void initStage(Stage stage) {
-        primaryStage = stage;        
-        primaryStage.initStyle(StageStyle.UNDECORATED);        
+        primaryStage = stage;               
     }
 
     @FXML

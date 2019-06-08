@@ -89,7 +89,6 @@ public class FXMLMainWindowController implements Initializable {
     
     public void initStage(Stage stage){
         primaryStage = stage;
-        
         primaryStage.setOnCloseRequest((e)->{
             onClickMenuBarClose(null);
         });
@@ -117,16 +116,22 @@ public class FXMLMainWindowController implements Initializable {
     private void onClickStartSession(ActionEvent event) {
         /*Open window*/
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLPreStartSession.fxml"));
-            AnchorPane root = (AnchorPane) loader.load();
-            Stage stage = new Stage();
-            FXMLPreStartSessionController preStartSession = loader.<FXMLPreStartSessionController>getController();
-            preStartSession.initStage(singleton, stage);
-            Scene scene = new Scene(root);  
-            stage.setScene(scene);
-            stage.setTitle("Interval Timer");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
+            if(singleton.getGym().getGrupos().isEmpty()){
+                Utils.dialog(Alert.AlertType.WARNING, "Warning", "There are no groups", "You must create at least one group to start a session");
+            }
+            else{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLPreStartSession.fxml"));
+                AnchorPane root = (AnchorPane) loader.load();
+                Stage stage = new Stage();
+                FXMLPreStartSessionController preStartSession = loader.<FXMLPreStartSessionController>getController();
+                preStartSession.initStage(singleton, stage);
+                Scene scene = new Scene(root);  
+                stage.setScene(scene);
+                stage.setTitle("Interval Timer");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            }
+            
         }
         catch(IOException ioe){ioe.printStackTrace();}
     }

@@ -41,8 +41,8 @@
                <children>
                   <Text fx:id="tGroup" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Group" />
                   <Text layoutX="10.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="SessionTemplate" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="cbGroup" editable="true" prefHeight="25.0" prefWidth="288.0" promptText="🔍 Search Group" GridPane.columnIndex="1" />
-                  <ComboBox fx:id="cbSessionTemplate" editable="true" prefHeight="25.0" prefWidth="482.0" promptText="🔍 Search Template" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cbGroup" prefHeight="25.0" prefWidth="288.0" promptText="🔍 Search Group" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="cbSessionTemplate" prefHeight="25.0" prefWidth="482.0" promptText="🔍 Search Template" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <AnchorPane prefHeight="28.0" prefWidth="400.0">

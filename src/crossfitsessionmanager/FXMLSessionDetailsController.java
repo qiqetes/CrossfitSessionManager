@@ -59,7 +59,6 @@ public class FXMLSessionDetailsController implements Initializable {
         template = sT;  
         primaryStage = stage;
         primaryStage.setResizable(false);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
         
         lCode.setText(template.getCodigo());
         lWarmTime.setText(template.getT_calentamiento() + " seconds");

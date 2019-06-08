@@ -13,9 +13,9 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@MyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLSessionTemplatesController">
    <children>
-      <HBox fillHeight="false" layoutX="10.0" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <HBox fillHeight="false" layoutX="10.0" layoutY="2.0" prefHeight="800.0" prefWidth="1000.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <children>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="690.0" styleClass="card">
+            <VBox prefHeight="750.0" prefWidth="690.0" styleClass="card">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Crossfit Sessions" />
                   <Separator prefWidth="200.0">
@@ -29,14 +29,14 @@
                   <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
                </padding>
             </VBox>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+            <VBox prefHeight="750.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
                <children>
                   <AnchorPane prefHeight="189.0" prefWidth="246.0" styleClass="card">
                      <children>
-                        <VBox minWidth="200.0" prefHeight="168.0" prefWidth="246.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="168.0" prefWidth="246.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#bAddTemplate" prefHeight="40.0" prefWidth="678.0" styleClass="logic-button" text="Add Template">
                                  <VBox.margin>
@@ -58,7 +58,7 @@
                   <AnchorPane prefHeight="483.0" prefWidth="250.0" />
                   <AnchorPane prefHeight="80.0" prefWidth="226.0" styleClass="card">
                      <children>
-                        <VBox layoutY="127.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="226.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox layoutY="127.0" prefHeight="80.0" prefWidth="226.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <padding>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>

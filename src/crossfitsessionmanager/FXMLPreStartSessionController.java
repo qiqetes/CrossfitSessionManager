@@ -100,23 +100,7 @@ public class FXMLPreStartSessionController implements Initializable {
         cbGroup.valueProperty().addListener((observable, oldVal,newVal)->{
                 cbSessionTemplate.setValue(cbGroup.getValue().getDefaultTipoSesion());
         });
-        cbGroup.getEditor().textProperty().addListener((observable, oldVal,newVal)->{
-            ArrayList<Grupo> grupos = singleton.getGym().getGrupos();
-            ObservableList<Grupo> gruposObs = FXCollections.observableArrayList(grupos);
-            ObservableList<Grupo> gruposObsRes = FXCollections.observableArrayList(grupos);
-            
-            for(int i = 0; i<gruposObs.size(); i++){
-                System.out.println(gruposObs.get(i).getCodigo() + ", " + newVal);
-                if(!gruposObs.get(i).getCodigo().startsWith(newVal)){
-                    gruposObsRes.remove(grupos.get(i));
-                }
-                else{
-                    gruposObsRes.remove(grupos.get(i));
-                }
-            }
-            
-            cbGroup.setItems(gruposObsRes);
-        });
+        
     }    
 
     @FXML

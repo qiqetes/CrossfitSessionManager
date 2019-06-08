@@ -59,7 +59,7 @@
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <ComboBox fx:id="cBDefaultSession" editable="true" prefHeight="31.0" prefWidth="497.0" promptText="🔍 Search Template" GridPane.columnIndex="1">
+                  <ComboBox fx:id="cBDefaultSession" prefHeight="31.0" prefWidth="497.0" promptText="🔍 Search Template" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>

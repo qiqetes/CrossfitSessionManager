@@ -187,8 +187,6 @@ public class FXMLAddTemplateController implements Initializable {
     
     public void initStage(Stage stage) {
         primaryStage = stage;
-        primaryStage.setResizable(false);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
     }
     
     

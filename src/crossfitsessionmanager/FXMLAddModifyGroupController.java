@@ -128,7 +128,6 @@ public class FXMLAddModifyGroupController implements Initializable {
     void initStage(Stage stage, AccesoBD singleton, Grupo grupo, TableView tbleView) {
         primaryStage = stage;
         primaryStage.setResizable(false);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
         
         this.singleton = singleton;
         this.refTableView = tbleView;
