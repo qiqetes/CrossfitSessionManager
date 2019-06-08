@@ -13,85 +13,66 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@MyStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crossfitsessionmanager.FXMLMainWindowController">
    <children>
-      <ImageView fitHeight="840.0" fitWidth="1215.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="820.0" fitWidth="1300.0" layoutX="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../resources/BG.png" />
          </image>
       </ImageView>
-      <HBox>
+      <MenuBar prefHeight="25.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarSave" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarClose" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Groups">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarManageGroups" text="Manage Groups" />
+              <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarAddGroup" text="Add Group" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Sessions">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarAddTemplate" text="Add Template" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button mnemonicParsing="false" onAction="#onClickMenuBarClose" styleClass="play-button" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <graphic>
+            <ImageView fitHeight="14.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/cross.png" />
+               </image>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant color="#725d5d" />
+                     </light>
+                  </Lighting>
+               </effect>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+      <VBox layoutX="550.0" layoutY="72.0" prefHeight="200.0" prefWidth="8000.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
          <children>
-            <MenuBar prefHeight="25.0" prefWidth="1150.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarSave" text="Save" />
-                        <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarClose" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Groups">
-                  <items>
-                        <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarManageGroups" text="Manage Groups" />
-                    <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarAddGroup" text="Add Group" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Sessions">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#onClickMenuBarAddTemplate" text="Add Template" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-            <AnchorPane>
-               <children>
-                  <MenuBar>
-                     <menus>
-                        <Menu mnemonicParsing="false" />
-                     </menus>
-                  </MenuBar>
-                  <Button mnemonicParsing="false" onAction="#onClickMenuBarClose" styleClass="play-button">
-                     <graphic>
-                        <ImageView fitHeight="14.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/cross.png" />
-                           </image>
-                           <effect>
-                              <Lighting>
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                                 <light>
-                                    <Light.Distant color="#725d5d" />
-                                 </light>
-                              </Lighting>
-                           </effect>
-                        </ImageView>
-                     </graphic>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-               </children>
-            </AnchorPane>
-         </children>
-      </HBox>
-      <VBox layoutX="550.0" layoutY="72.0" prefHeight="730.0" prefWidth="652.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
-         <children>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <ImageView fitHeight="278.0" fitWidth="284.0" layoutX="408.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </AnchorPane>
-            <GridPane prefHeight="279.0" prefWidth="1100.0">
+            <GridPane maxHeight="279.0" maxWidth="1920.0" prefHeight="200.0" prefWidth="8000.0" VBox.vgrow="ALWAYS">
                <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="370.0" minWidth="10.0" prefWidth="366.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="374.0" minWidth="10.0" prefWidth="366.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="422.0" minWidth="10.0" prefWidth="366.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="370.0" minWidth="10.0" prefWidth="1200.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="374.0" minWidth="10.0" prefWidth="1200.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="422.0" minWidth="10.0" prefWidth="1200.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -122,6 +103,9 @@
                         </ImageView>
                      </graphic></Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </GridPane>
          </children>
       </VBox>
