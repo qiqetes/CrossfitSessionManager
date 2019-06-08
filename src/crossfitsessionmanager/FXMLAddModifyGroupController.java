@@ -75,14 +75,17 @@ public class FXMLAddModifyGroupController implements Initializable {
 
             @Override
             public String toString(SesionTipo template) {
-                return "Template: " + template.getCodigo();
+                if(template == null)return "";
+                return template.getCodigo();
             }
 
             @Override
             public SesionTipo fromString(String string) {
                 throw new UnsupportedOperationException("DON'T USE ME!"); 
             }
-        });                
+        });       
+        cBDefaultSession.setVisibleRowCount(5); //Sets a scroll bar for the combobox if there are more than 5 items
+         
     }    
     
     @FXML
@@ -138,8 +141,6 @@ public class FXMLAddModifyGroupController implements Initializable {
         /*Create new group otherwise*/
         else{
             g = new Grupo();
-            /*Set default value for ComboBox when opening the window to add a new group*/
-            if(FXMLMainWindowController.obsListSessions.get(0) != null){cBDefaultSession.setValue(FXMLMainWindowController.obsListSessions.get(0));}
         }
     }
 
