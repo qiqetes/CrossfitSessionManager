@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -40,6 +41,10 @@ public class FXMLPreStartSessionController implements Initializable {
     
     private AccesoBD singleton;
     private Stage primaryStage;
+    
+    private boolean firstTime = true;
+    @FXML
+    private Text tGroup;
 
     /**
      * Initializes the controller class.
@@ -49,7 +54,6 @@ public class FXMLPreStartSessionController implements Initializable {
         /*ComboBox initialization*/
         cbGroup.setItems(FXMLMainWindowController.groupObsList);
         cbGroup.setConverter(new StringConverter<Grupo>() {
-
             @Override
             public String toString(Grupo group) {
                 if(group == null)return "";
@@ -62,8 +66,14 @@ public class FXMLPreStartSessionController implements Initializable {
             }
         });   
         cbGroup.setVisibleRowCount(5); //Sets a scroll bar for the combobox if there are more than 5 items
+        /*Keeps the combo box unfold*/
         cbGroup.focusedProperty().addListener((obs, oldVal, newVal)->{
-            cbGroup.show();
+            if(firstTime){
+                tGroup.requestFocus(); //To loose focus the first time and not get displayed items
+                firstTime = false;
+            }else{
+                cbGroup.show();
+            }
         });
         
         cbSessionTemplate.setItems(FXMLMainWindowController.obsListSessions);
@@ -81,6 +91,10 @@ public class FXMLPreStartSessionController implements Initializable {
             }
         });  
         cbSessionTemplate.setVisibleRowCount(5); //Sets a scroll bar for the combobox if there are more than 5 items
+        /*Keeps the combo box unfold*/
+        cbSessionTemplate.focusedProperty().addListener((obs, oldVal, newVal)->{
+            cbSessionTemplate.show();
+        });
                 
         /*Listener that synchronizes the correspondinf default template session when selecting a group*/
         cbGroup.valueProperty().addListener((observable, oldVal,newVal)->{

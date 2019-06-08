@@ -85,6 +85,10 @@ public class FXMLAddModifyGroupController implements Initializable {
             }
         });       
         cBDefaultSession.setVisibleRowCount(5); //Sets a scroll bar for the combobox if there are more than 5 items
+        /*Keeps the combo box unfold*/
+        cBDefaultSession.focusedProperty().addListener((obs, oldVal, newVal)->{
+            cBDefaultSession.show();
+        });
          
     }    
     
