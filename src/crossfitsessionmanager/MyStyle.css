@@ -138,18 +138,18 @@
 }
 
 .play-button{
-    -fx-background-radius: 100%;
+    -fx-background-radius: 50%;
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, -col-shadow, 10, 0, 0, 5);
 }
 
 .button-start{
     -fx-font-size: 16px;
-    -fx-background-color: black;
+    -fx-background-color: -col-accent;
     -fx-border-color: white;
-    -fx-border-radius: 100%;
-    -fx-border-width: 10px;
-    -fx-background-radius: 47%;
+    -fx-border-radius: 50%;
+    -fx-border-width: 2px;
+    -fx-background-radius: 50;
     -fx-text-fill: white;
     -fx-effect: dropshadow(three-pass-box, -col-shadow, 10, 0, 0, 5);
 }
