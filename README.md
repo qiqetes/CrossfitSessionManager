@@ -8,5 +8,5 @@ JavaFx and SceneBuilder for the UIs.
 
 
 ### Collaborators
-- [@BorjaSanz11](https://github.com/BorjaSanz11)
+- [BorjaSanz11](https://github.com/BorjaSanz11)
 - [qiqetes](https://github.com/qiqetes)
